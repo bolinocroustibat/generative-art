@@ -1,13 +1,25 @@
 let seed;
 let rects = [];
-let colorPalette; // Variable to store the imported color palette
+
+const colors = [
+		"#a7ba42",
+		"#95ccba",
+		"#ffdede",
+		"#fff0cb",
+		"#f2cc84",
+		"#9e6e5d",
+		"#b8e5db",
+		"#f8dcd2",
+		"#ceb37c",
+		"#9c99a5",
+		"#ffe8b5",
+		"#d3d0cb",
+	]
 
 function setup() {
   createCanvas(960, 960, WEBGL);
   smooth(16);
   pixelDensity(2);
-  // Load the color palette from the external file
-  colorPalette = loadColorPalette('royalTenenbaums');
   generate();
 }
 
@@ -79,18 +91,18 @@ function generate() {
         let y2 = lerp(ys[k], ys[(k + 1) % 4], v2);
 
         beginShape();
-        fill(rcol());
+        fill(getRandomColor());
         vertex(cx, cy, hh * 0.5);
-        fill(rcol());
+        fill(getRandomColor());
         vertex(x1, y1, hh);
         vertex(x2, y2, hh);
         endShape();
 
         beginShape();
-        fill(rcol());
+        fill(getRandomColor());
         vertex(x1, y1, 0);
         vertex(x2, y2, 0);
-        fill(rcol());
+        fill(getRandomColor());
         vertex(x2, y2, hh);
         vertex(x1, y1, hh);
         endShape();
@@ -112,28 +124,32 @@ function saveImage() {
   saveCanvas(timestamp, 'png');
 }
 
-// Function to load a color palette from the external file
-function loadColorPalette(paletteName) {
-  // Get the palette from the global colorPalettes object
-  if (!window.colorPalettes || !window.colorPalettes[paletteName]) {
-    console.error(`Palette "${paletteName}" not found`);
-    return ["#000000"]; // Return a default color if palette not found
-  }
-  return window.colorPalettes[paletteName];
+/**
+ * Returns a random color from the palette
+ */
+function getRandomColor() {
+  const palette = window.colorPalettes.royalTenenbaums;
+  return color(palette[floor(random(palette.length))]);
 }
 
-function rcol() {
-  return color(colorPalette[floor(random(colorPalette.length))]);
+/**
+ * Returns an interpolated color based on a random position in the palette
+ */
+function getInterpolatedRandomColor() {
+  const palette = window.colorPalettes.royalTenenbaums;
+  return getInterpolatedColor(random(palette.length));
 }
 
-function getColor() {
-  return getColor(random(colorPalette.length));
-}
-
-function getColor(v) {
-  v = abs(v);
-  v = v % colorPalette.length;
-  let c1 = colorPalette[floor(v % colorPalette.length)];
-  let c2 = colorPalette[floor((v + 1) % colorPalette.length)];
-  return lerpColor(color(c1), color(c2), v % 1);
+/**
+ * Returns an interpolated color between two adjacent colors in the palette
+ * @param {number} position - Position in the color palette (can be fractional)
+ * @returns {p5.Color} Interpolated color
+ */
+function getInterpolatedColor(position) {
+  const palette = window.colorPalettes.royalTenenbaums;
+  position = abs(position);
+  position = position % palette.length;
+  let c1 = palette[floor(position % palette.length)];
+  let c2 = palette[floor((position + 1) % palette.length)];
+  return lerpColor(color(c1), color(c2), position % 1);
 }
