@@ -1,26 +1,29 @@
-import { colorPalettes } from "../data/colors_palettes.js"
+import p5 from "p5"
+import { colorPalettes } from "../data/colors_palettes.ts"
+import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
-const sketch = (p) => {
-	let seed
-	let rects = []
-	let colors // Variable to store the color palette
+const sketch = (p: p5) => {
+	let seed: number
+	let rects: p5.Vector[] = []
+	let colors: string[] // Variable to store the color palette
 
-	p.setup = () => {
+	p.setup = (): void => {
 		p.createCanvas(960, 960, p.WEBGL)
 		p.smooth(16)
 		p.pixelDensity(2)
 		// Initialize the colors from the imported palette
 		colors = colorPalettes.royalTenenbaums
+		seed = p.floor(p.random(999999)) // Initialize seed
 		generate()
 	}
 
-	p.draw = () => {
+	p.draw = (): void => {
 		// if (frameCount % 60 == 0) generate();
 		// generate();
 	}
 
-	const generate = () => {
+	const generate = (): void => {
 		p.background(0)
 		p.randomSeed(seed)
 
@@ -101,29 +104,17 @@ const sketch = (p) => {
 		}
 	}
 
-	const saveImage = () => {
-		const timestamp =
-			p.year() +
-			p.nf(p.month(), 2) +
-			p.nf(p.day(), 2) +
-			"-" +
-			p.nf(p.hour(), 2) +
-			p.nf(p.minute(), 2) +
-			p.nf(p.second(), 2)
-		p.saveCanvas(timestamp, "png")
-	}
-
 	/**
 	 * Returns a random color from the palette
 	 */
-	const getRandomColor = () => {
+	const getRandomColor = (): p5.Color => {
 		return p.color(colors[p.floor(p.random(colors.length))])
 	}
 
 	/**
 	 * Returns an interpolated color based on a random position in the palette
 	 */
-	const getInterpolatedRandomColor = () => {
+	const getInterpolatedRandomColor = (): p5.Color => {
 		return getInterpolatedColor(p.random(colors.length))
 	}
 
@@ -132,13 +123,21 @@ const sketch = (p) => {
 	 * @param {number} position - Position in the color palette (can be fractional)
 	 * @returns {p5.Color} Interpolated color
 	 */
-	const getInterpolatedColor = (position) => {
+	const getInterpolatedColor = (position: number): p5.Color => {
 		position = p.abs(position)
 		position = position % colors.length
 		const c1 = colors[p.floor(position % colors.length)]
 		const c2 = colors[p.floor((position + 1) % colors.length)]
 		return p.lerpColor(p.color(c1), p.color(c2), position % 1)
 	}
+
+	// Set up keyboard controls with our custom generate function
+	p.keyPressed = setupKeyboardControls(p, {
+		generateFn: () => {
+			seed = p.floor(p.random(999999))
+			generate()
+		},
+	})
 }
 
 // Create a new p5 instance with the sketch
