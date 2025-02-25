@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Generative Art</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
-  <script src="../data/colors_palettes.js"></script>
-  <script src="index.js"></script>
+  <!-- Load p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <!-- Note: p5.dom is deprecated in newer versions, using p5.js core functionality instead -->
+  
+  <!-- Load the main sketch as a module - this is crucial for ES6 imports to work -->
+  <script type="module" src="index.js"></script>
+  
   <style>
     body {
       margin: 0;
@@ -17,4 +20,4 @@
 </head>
 <body>
 </body>
-</html> 
+</html>

@@ -1,5 +1,8 @@
-// Make the color palettes available globally for p5.js sketches
-window.colorPalettes = {
+// Color palettes for generative art
+console.log("Colors palettes loaded from data directory") // Debug message to confirm loading
+
+// Export the color palettes using ES6 module syntax
+export const colorPalettes = {
 	default: [
 		"#D5E486",
 		"#24C0F2",
@@ -14,7 +17,7 @@ window.colorPalettes = {
 		"#EB6156",
 		"#E94A6A",
 	],
-	
+
 	rothko: [
 		// https://github.com/mmerrittsmith/rothko
 		"#5C2D8D", // Violet
@@ -30,7 +33,7 @@ window.colorPalettes = {
 		"#FF69B4", // Pink
 		"#8B4513", // Saddle Brown
 	],
-	
+
 	royalTenenbaums: [
 		"#a7ba42",
 		"#95ccba",
@@ -45,8 +48,8 @@ window.colorPalettes = {
 		"#ffe8b5",
 		"#d3d0cb",
 	],
-	
+
 	// AKIRA
 	// https://mediachomp.com/akira-color-palette/
 	// https://www.facebook.com/colorpalette.cinema/
-};
+}
