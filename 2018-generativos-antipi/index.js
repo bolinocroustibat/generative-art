@@ -1,155 +1,145 @@
-let seed;
-let rects = [];
+import { colorPalettes } from "../data/colors_palettes.js"
 
-const colors = [
-		"#a7ba42",
-		"#95ccba",
-		"#ffdede",
-		"#fff0cb",
-		"#f2cc84",
-		"#9e6e5d",
-		"#b8e5db",
-		"#f8dcd2",
-		"#ceb37c",
-		"#9c99a5",
-		"#ffe8b5",
-		"#d3d0cb",
-	]
+// Create a p5.js sketch in instance mode
+const sketch = (p) => {
+	let seed
+	let rects = []
+	let colors // Variable to store the color palette
 
-function setup() {
-  createCanvas(960, 960, WEBGL);
-  smooth(16);
-  pixelDensity(2);
-  generate();
+	p.setup = () => {
+		p.createCanvas(960, 960, p.WEBGL)
+		p.smooth(16)
+		p.pixelDensity(2)
+		// Initialize the colors from the imported palette
+		colors = colorPalettes.royalTenenbaums
+		generate()
+	}
+
+	p.draw = () => {
+		// if (frameCount % 60 == 0) generate();
+		// generate();
+	}
+
+	const generate = () => {
+		p.background(0)
+		p.randomSeed(seed)
+
+		const fov = p.PI / p.random(1.4, 4)
+		const cameraZ = p.height / 2.0 / p.tan(fov / 2.0)
+		p.perspective(fov, p.width / p.height, cameraZ / 100.0, cameraZ * 100.0)
+
+		p.translate(p.width / 2, p.height / 2, -900)
+		const ma = p.PI * 0.3
+		p.rotateX(p.random(-ma, ma))
+		p.rotateY(p.random(-ma, ma))
+		p.rotateZ(p.random(-ma, ma))
+
+		const size = 5
+		rects = []
+		rects.push(
+			p.createVector(
+				-p.width * size * 0.5,
+				-p.height * size * 0.5,
+				p.width * size,
+			),
+		)
+		const sub = p.floor(p.random(20, 1000))
+		for (let i = 0; i < sub; i++) {
+			const ind = p.floor(p.random(rects.length * p.random(1)))
+			const r = rects[ind]
+			const md = r.z * 0.5
+			rects.push(p.createVector(r.x, r.y, md))
+			rects.push(p.createVector(r.x + md, r.y, md))
+			rects.push(p.createVector(r.x + md, r.y + md, md))
+			rects.push(p.createVector(r.x, r.y + md, md))
+			rects.splice(ind, 1)
+		}
+
+		for (let i = 0; i < rects.length; i++) {
+			const r = rects[i]
+			p.rect(r.x, r.y, r.z, r.z)
+			const hh = r.z * 1
+			const cx = r.x + r.z * 0.5
+			const cy = r.y + r.z * 0.5
+			const div = p.floor(p.random(2, 12))
+
+			const xs = [r.x, r.x + r.z, r.x + r.z, r.x]
+			const ys = [r.y, r.y, r.y + r.z, r.y + r.z]
+
+			p.fill(100)
+			p.stroke(255)
+
+			p.noStroke()
+			for (let j = 0; j < div; j++) {
+				const v1 = p.map(j, 0, div, 0, 1)
+				const v2 = p.map(j + 1, 0, div, 0, 1)
+
+				for (let k = 0; k < 4; k++) {
+					const x1 = p.lerp(xs[k], xs[(k + 1) % 4], v1)
+					const y1 = p.lerp(ys[k], ys[(k + 1) % 4], v1)
+					const x2 = p.lerp(xs[k], xs[(k + 1) % 4], v2)
+					const y2 = p.lerp(ys[k], ys[(k + 1) % 4], v2)
+
+					p.beginShape()
+					p.fill(getRandomColor())
+					p.vertex(cx, cy, hh * 0.5)
+					p.fill(getRandomColor())
+					p.vertex(x1, y1, hh)
+					p.vertex(x2, y2, hh)
+					p.endShape()
+
+					p.beginShape()
+					p.fill(getRandomColor())
+					p.vertex(x1, y1, 0)
+					p.vertex(x2, y2, 0)
+					p.fill(getRandomColor())
+					p.vertex(x2, y2, hh)
+					p.vertex(x1, y1, hh)
+					p.endShape()
+				}
+			}
+		}
+	}
+
+	const saveImage = () => {
+		const timestamp =
+			p.year() +
+			p.nf(p.month(), 2) +
+			p.nf(p.day(), 2) +
+			"-" +
+			p.nf(p.hour(), 2) +
+			p.nf(p.minute(), 2) +
+			p.nf(p.second(), 2)
+		p.saveCanvas(timestamp, "png")
+	}
+
+	/**
+	 * Returns a random color from the palette
+	 */
+	const getRandomColor = () => {
+		return p.color(colors[p.floor(p.random(colors.length))])
+	}
+
+	/**
+	 * Returns an interpolated color based on a random position in the palette
+	 */
+	const getInterpolatedRandomColor = () => {
+		return getInterpolatedColor(p.random(colors.length))
+	}
+
+	/**
+	 * Returns an interpolated color between two adjacent colors in the palette
+	 * @param {number} position - Position in the color palette (can be fractional)
+	 * @returns {p5.Color} Interpolated color
+	 */
+	const getInterpolatedColor = (position) => {
+		position = p.abs(position)
+		position = position % colors.length
+		const c1 = colors[p.floor(position % colors.length)]
+		const c2 = colors[p.floor((position + 1) % colors.length)]
+		return p.lerpColor(p.color(c1), p.color(c2), position % 1)
+	}
 }
 
-function draw() {
-  // if (frameCount % 60 == 0) generate();
-  // generate();
-}
-
-function keyPressed() {
-  if (key === 's') saveImage();
-  else {
-    seed = floor(random(999999));
-    generate();
-  }
-}
-
-function generate() {
-  background(0);
-  randomSeed(seed);
-
-  let fov = PI / random(1.4, 4);
-  let cameraZ = (height / 2.0) / tan(fov / 2.0);
-  perspective(fov, width / height, cameraZ / 100.0, cameraZ * 100.0);
-
-  translate(width / 2, height / 2, -900);
-  let ma = PI * 0.3;
-  rotateX(random(-ma, ma));
-  rotateY(random(-ma, ma));
-  rotateZ(random(-ma, ma));
-
-  let size = 5;
-  rects = [];
-  rects.push(createVector(-width * size * 0.5, -height * size * 0.5, width * size));
-  let sub = floor(random(20, 1000));
-  for (let i = 0; i < sub; i++) {
-    let ind = floor(random(rects.length * random(1)));
-    let r = rects[ind];
-    let md = r.z * 0.5;
-    rects.push(createVector(r.x, r.y, md));
-    rects.push(createVector(r.x + md, r.y, md));
-    rects.push(createVector(r.x + md, r.y + md, md));
-    rects.push(createVector(r.x, r.y + md, md));
-    rects.splice(ind, 1);
-  }
-
-  for (let i = 0; i < rects.length; i++) {
-    let r = rects[i];
-    rect(r.x, r.y, r.z, r.z);
-    let hh = r.z * 1;
-    let cx = r.x + r.z * 0.5;
-    let cy = r.y + r.z * 0.5;
-    let div = floor(random(2, 12));
-
-    let xs = [r.x, r.x + r.z, r.x + r.z, r.x];
-    let ys = [r.y, r.y, r.y + r.z, r.y + r.z];
-
-    fill(100);
-    stroke(255);
-
-    noStroke();
-    for (let j = 0; j < div; j++) {
-      let v1 = map(j, 0, div, 0, 1);
-      let v2 = map(j + 1, 0, div, 0, 1);
-
-      for (let k = 0; k < 4; k++) {
-        let x1 = lerp(xs[k], xs[(k + 1) % 4], v1);
-        let y1 = lerp(ys[k], ys[(k + 1) % 4], v1);
-        let x2 = lerp(xs[k], xs[(k + 1) % 4], v2);
-        let y2 = lerp(ys[k], ys[(k + 1) % 4], v2);
-
-        beginShape();
-        fill(getRandomColor());
-        vertex(cx, cy, hh * 0.5);
-        fill(getRandomColor());
-        vertex(x1, y1, hh);
-        vertex(x2, y2, hh);
-        endShape();
-
-        beginShape();
-        fill(getRandomColor());
-        vertex(x1, y1, 0);
-        vertex(x2, y2, 0);
-        fill(getRandomColor());
-        vertex(x2, y2, hh);
-        vertex(x1, y1, hh);
-        endShape();
-      }
-    }
-
-  }
-}
-
-function saveImage() {
-  let timestamp =
-    year() +
-    nf(month(), 2) +
-    nf(day(), 2) +
-    '-' +
-    nf(hour(), 2) +
-    nf(minute(), 2) +
-    nf(second(), 2);
-  saveCanvas(timestamp, 'png');
-}
-
-/**
- * Returns a random color from the palette
- */
-function getRandomColor() {
-  const palette = window.colorPalettes.royalTenenbaums;
-  return color(palette[floor(random(palette.length))]);
-}
-
-/**
- * Returns an interpolated color based on a random position in the palette
- */
-function getInterpolatedRandomColor() {
-  const palette = window.colorPalettes.royalTenenbaums;
-  return getInterpolatedColor(random(palette.length));
-}
-
-/**
- * Returns an interpolated color between two adjacent colors in the palette
- * @param {number} position - Position in the color palette (can be fractional)
- * @returns {p5.Color} Interpolated color
- */
-function getInterpolatedColor(position) {
-  const palette = window.colorPalettes.royalTenenbaums;
-  position = abs(position);
-  position = position % palette.length;
-  let c1 = palette[floor(position % palette.length)];
-  let c2 = palette[floor((position + 1) % palette.length)];
-  return lerpColor(color(c1), color(c2), position % 1);
-}
+// Create a new p5 instance with the sketch
+new p5(sketch)
