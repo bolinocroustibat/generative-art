@@ -1,8 +1,8 @@
 // Color palettes for generative art
 console.log("Colors palettes loaded from data directory") // Debug message to confirm loading
 
-// Export the color palettes using ES6 module syntax
-export const colorPalettes = {
+// Export the color palettes using ES6 module syntax with a simple type annotation
+export const colorPalettes: { [key: string]: string[] } = {
 	default: [
 		"#D5E486",
 		"#24C0F2",
