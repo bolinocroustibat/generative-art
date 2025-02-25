@@ -1,0 +1,21 @@
+{
+	"name": "generative-art",
+	"private": true,
+	"devDependencies": {
+		"@types/bun": "latest",
+		"biome": "^0.3.3"
+	},
+	"scripts": {
+		"dev": "bunx --bun vite",
+		"build": "bunx --bun vite build",
+		"preview": "bunx --bun vite preview",
+		"check": "biome check --write ."
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"p5": "^1.11.3",
+		"vite": "^6.2.0"
+	}
+}
