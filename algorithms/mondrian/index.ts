@@ -1,7 +1,7 @@
 import p5 from "p5"
-import { colorPalettes } from "../data/colorsPalettes.ts"
-import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
-import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
+import { colorPalettes } from "../../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../../helpers/canvasDimensions.ts"
+import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
@@ -13,7 +13,6 @@ const sketch = (p: p5) => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.noLoop()
-		// Initialize the colors from the imported palette
 		colors = colorPalettes.mondrian
 		seed = p.floor(p.random(999999)) // Initialize seed
 		generate()

@@ -1,12 +1,12 @@
 import p5 from "p5"
-import { colorPalettes } from "../data/colorsPalettes.ts"
-import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
+import { colorPalettes } from "../../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../../helpers/canvasDimensions.ts"
 import {
 	getInterpolatedColor,
 	getInterpolatedRandomColor,
 	getRandomColor,
-} from "../helpers/colorUtils.ts"
-import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
+} from "../../helpers/colorUtils.ts"
+import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
