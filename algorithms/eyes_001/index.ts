@@ -43,12 +43,12 @@ const sketch = (p: p5) => {
 			const s = p.map(i, 0, cc, p.width * 1.5, ss)
 			const mx = s * mdx
 			const my = s * mdy
-			
+
 			p.push()
 			p.translate(p.width / 2, p.height / 2)
 			p.rotate(p.map(i, 0, cc, rot, 0))
 			p.fill(getColor(ic + dc * i))
-			
+
 			p.beginShape()
 			p.vertex(x - s * 1.1, y) // first point
 			p.bezierVertex(x - s * 1.1, y - my, x - mx, y - s * 0.6, x, y - s * 0.6)
@@ -66,7 +66,7 @@ const sketch = (p: p5) => {
 	const eye = (x: number, y: number, s: number): void => {
 		const amp = p.random(0.5, p.random(0.5, 0.9))
 		p.fill(p.color("#EADBC6"))
-		
+
 		const mx = s * p.random(0.55, 0.64)
 		const my = s * p.random(0.08, 0.13)
 
