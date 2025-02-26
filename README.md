@@ -45,6 +45,7 @@ generative-art/
 ├── helpers/                 # Shared utility functions
 │   ├── canvasDimensions.ts  # Canvas sizing utilities
 │   ├── colorUtils.ts        # Color manipulation utilities
+│   ├── index.ts             # Central export file for all helpers
 │   ├── keyboardControls.ts  # Keyboard interaction utilities
 │   └── saveImage.ts         # Image saving utilities
 ├── settings.ts              # Global settings (algorithm selection, canvas dimensions)
@@ -98,7 +99,19 @@ You can set canvas dimensions by modifying the constants in `settings.ts`:
 export const CANVAS_WIDTH = 960
 export const CANVAS_HEIGHT = 960
 ```
+
 If these constants are commented out, the canvas will use the window dimensions.
+
+### Color Palettes
+
+The color palette is completely independent from the algorithm. You can set the palette to use by modifying the `COLOR_PALETTE` value in `settings.ts`:
+
+```typescript
+// Color palette to use
+export const COLOR_PALETTE = "op_prob1"
+```
+
+Available palettes can be found in `data/colorsPalettes.ts`. This decoupled approach allows you to use any palette with any algorithm, creating unique visual combinations.
 
 ### Keyboard Controls
 
