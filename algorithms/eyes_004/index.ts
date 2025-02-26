@@ -1,8 +1,8 @@
 import p5 from "p5"
-import { colorPalettes } from "../data/colorsPalettes.ts"
-import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
-import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
-import { saveImage } from "../helpers/saveImage.ts"
+import { colorPalettes } from "../../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../../helpers/canvasDimensions.ts"
+import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
+import { saveImage } from "../../helpers/saveImage.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
