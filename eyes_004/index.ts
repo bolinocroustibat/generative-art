@@ -1,5 +1,6 @@
 import p5 from "p5"
 import { colorPalettes } from "../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
 import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
 import { saveImage } from "../helpers/saveImage.ts"
 
@@ -10,7 +11,8 @@ const sketch = (p: p5) => {
 	const colors: string[] = colorPalettes.royalTenenbaums
 
 	p.setup = (): void => {
-		p.createCanvas(960, 960, p.WEBGL)
+		const dimensions = getCanvasDimensions(p)
+		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth(8)
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed

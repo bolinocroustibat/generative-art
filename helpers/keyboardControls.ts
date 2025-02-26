@@ -1,7 +1,6 @@
 import type p5 from "p5"
 import { saveImage } from "./saveImage"
 
-
 // Sets up common keyboard controls for p5 sketches
 //
 // Default controls:
@@ -10,10 +9,10 @@ import { saveImage } from "./saveImage"
 export const setupKeyboardControls = (
 	p: p5,
 	config: {
-		generateFn?: () => void;
-		saveFn?: (p: p5) => void;
-		customHandlers?: Record<string, () => void>;
-		algorithmName?: string;
+		generateFn?: () => void
+		saveFn?: (p: p5) => void
+		customHandlers?: Record<string, () => void>
+		algorithmName?: string
 	} = {},
 ): (() => void) => {
 	const {

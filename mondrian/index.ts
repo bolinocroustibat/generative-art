@@ -1,5 +1,6 @@
 import p5 from "p5"
 import { colorPalettes } from "../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
 import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
@@ -9,7 +10,8 @@ const sketch = (p: p5) => {
 	let weightedColors: { value: p5.Color; weight: number }[]
 
 	p.setup = (): void => {
-		p.createCanvas(960, 960)
+		const dimensions = getCanvasDimensions(p)
+		p.createCanvas(dimensions.width, dimensions.height)
 		p.noLoop()
 		// Initialize the colors from the imported palette
 		colors = colorPalettes.mondrian

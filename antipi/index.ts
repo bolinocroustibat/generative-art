@@ -1,5 +1,6 @@
 import p5 from "p5"
 import { colorPalettes } from "../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
 import {
 	getInterpolatedColor,
 	getInterpolatedRandomColor,
@@ -14,7 +15,8 @@ const sketch = (p: p5) => {
 	let colors: string[] // Variable to store the color palette
 
 	p.setup = (): void => {
-		p.createCanvas(960, 960, p.WEBGL)
+		const dimensions = getCanvasDimensions(p)
+		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth(16)
 		p.pixelDensity(2)
 		// Initialize the colors from the imported palette

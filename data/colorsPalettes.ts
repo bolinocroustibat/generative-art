@@ -36,7 +36,7 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#43251B",
 		"#C81961",
 		"#373868",
-		"#FFF8DC"
+		"#FFF8DC",
 	],
 
 	rothko: [
