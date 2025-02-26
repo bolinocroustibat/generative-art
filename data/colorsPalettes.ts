@@ -18,6 +18,27 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#E94A6A",
 	],
 
+	// Eyes 004 palette
+	eyes004: [
+		"#D81D03", // Red
+		"#101A9D", // Blue
+		"#1C7E4E", // Green
+		"#F6A402", // Yellow
+		"#EFD4BF", // Beige
+		"#E2E0EF", // Light Purple
+		"#050400", // Black
+	],
+
+	III: [
+		"#2B3F3E",
+		"#312A3B",
+		"#F25532",
+		"#43251B",
+		"#C81961",
+		"#373868",
+		"#FFF8DC"
+	],
+
 	rothko: [
 		// https://github.com/mmerrittsmith/rothko
 		"#5C2D8D", // Violet
@@ -52,4 +73,12 @@ export const colorPalettes: { [key: string]: string[] } = {
 	// AKIRA
 	// https://mediachomp.com/akira-color-palette/
 	// https://www.facebook.com/colorpalette.cinema/
+
+	// Mondrian palette
+	mondrian: [
+		"#FFFFFF", // White (with higher weight in the original)
+		"#FF0000", // Red
+		"#0000FF", // Blue
+		"#FFFF00", // Yellow
+	],
 }

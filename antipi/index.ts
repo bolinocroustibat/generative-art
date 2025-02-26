@@ -1,5 +1,10 @@
 import p5 from "p5"
-import { colorPalettes } from "../data/colors_palettes.ts"
+import { colorPalettes } from "../data/colorsPalettes.ts"
+import {
+	getInterpolatedColor,
+	getInterpolatedRandomColor,
+	getRandomColor,
+} from "../helpers/colorUtils.ts"
 import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
@@ -84,18 +89,18 @@ const sketch = (p: p5) => {
 					const y2 = p.lerp(ys[k], ys[(k + 1) % 4], v2)
 
 					p.beginShape()
-					p.fill(getRandomColor())
+					p.fill(getRandomColor(p, colors))
 					p.vertex(cx, cy, hh * 0.5)
-					p.fill(getRandomColor())
+					p.fill(getRandomColor(p, colors))
 					p.vertex(x1, y1, hh)
 					p.vertex(x2, y2, hh)
 					p.endShape()
 
 					p.beginShape()
-					p.fill(getRandomColor())
+					p.fill(getRandomColor(p, colors))
 					p.vertex(x1, y1, 0)
 					p.vertex(x2, y2, 0)
-					p.fill(getRandomColor())
+					p.fill(getRandomColor(p, colors))
 					p.vertex(x2, y2, hh)
 					p.vertex(x1, y1, hh)
 					p.endShape()
@@ -104,39 +109,13 @@ const sketch = (p: p5) => {
 		}
 	}
 
-	/**
-	 * Returns a random color from the palette
-	 */
-	const getRandomColor = (): p5.Color => {
-		return p.color(colors[p.floor(p.random(colors.length))])
-	}
-
-	/**
-	 * Returns an interpolated color based on a random position in the palette
-	 */
-	const getInterpolatedRandomColor = (): p5.Color => {
-		return getInterpolatedColor(p.random(colors.length))
-	}
-
-	/**
-	 * Returns an interpolated color between two adjacent colors in the palette
-	 * @param {number} position - Position in the color palette (can be fractional)
-	 * @returns {p5.Color} Interpolated color
-	 */
-	const getInterpolatedColor = (position: number): p5.Color => {
-		position = p.abs(position)
-		position = position % colors.length
-		const c1 = colors[p.floor(position % colors.length)]
-		const c2 = colors[p.floor((position + 1) % colors.length)]
-		return p.lerpColor(p.color(c1), p.color(c2), position % 1)
-	}
-
 	// Set up keyboard controls with our custom generate function
 	p.keyPressed = setupKeyboardControls(p, {
 		generateFn: () => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
+		algorithmName: "antipi",
 	})
 }
 
