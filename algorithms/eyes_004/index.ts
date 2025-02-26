@@ -1,19 +1,15 @@
 import p5 from "p5"
-import { colorPalettes } from "../../data/colorsPalettes.ts"
-import { getCanvasDimensions } from "../../helpers/canvasDimensions.ts"
-import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
-import { saveImage } from "../../helpers/saveImage.ts"
+import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-
-	const colors: string[] = colorPalettes.royalTenenbaums
+	const colors: string[] = getColorPalette()
 
 	p.setup = (): void => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
-		p.smooth(8)
+		p.smooth()
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
 		generate()
@@ -145,9 +141,6 @@ const sketch = (p: p5) => {
 			generate()
 		},
 		algorithmName: "eyes004",
-		customHandlers: {
-			s: () => saveImage(p),
-		},
 	})
 }
 

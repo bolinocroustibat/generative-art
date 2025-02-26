@@ -1,8 +1,29 @@
 import type p5 from "p5"
+import { colorPalettes } from "../data/colorsPalettes.ts"
+import { COLOR_PALETTE } from "../settings.ts"
 
 /**
  * Color utility functions for generative art
  */
+
+/**
+ * Returns the color palette specified in settings or a specified one
+ * @param paletteName - Optional name of the palette to use (overrides the setting)
+ * @returns Array of color strings
+ * @throws Error if palette doesn't exist
+ */
+export const getColorPalette = (paletteName?: string): string[] => {
+	// Use the provided palette name or the COLOR_PALETTE from settings
+	const paletteToUse = paletteName || COLOR_PALETTE
+	
+	// Check if the requested palette exists
+	if (colorPalettes[paletteToUse]) {
+		return colorPalettes[paletteToUse]
+	}
+	
+	// If palette doesn't exist, throw an error
+	throw new Error(`Color palette "${paletteToUse}" not found. Available palettes: ${Object.keys(colorPalettes).join(", ")}`)
+}
 
 /**
  * Returns a random color from the palette
