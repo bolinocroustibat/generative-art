@@ -1,7 +1,7 @@
 // Main entry point for the generative art project
 import { CURRENT_ALGORITHM } from './settings'
 
-console.log(`Loading algorithm: ${CURRENT_ALGORITHM}`)
+console.log(`Loading algorithm: "${CURRENT_ALGORITHM}"`)
 
 // Dynamically import the selected algorithm
 import(`./algorithms/${CURRENT_ALGORITHM}/index.ts`)

@@ -18,7 +18,6 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#E94A6A",
 	],
 
-	// Eyes 001 palette
 	eyes001: [
 		"#0795D0",
 		"#019C54",
@@ -34,7 +33,6 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#EBD417",
 	],
 
-	// Eyes 004 palette
 	eyes004: [
 		"#D81D03",
 		"#101A9D",
@@ -71,13 +69,40 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FEFEFE",
 	],
 
-	// Op_prob1 palette
 	op_prob1: [
-		"#E70012", // Red
-		"#D3A100", // Yellow/Gold
-		"#017160", // Green
-		"#00A0E9", // Blue
-		"#072B45", // Dark Blue
+		"#E70012",
+		"#D3A100",
+		"#017160",
+		"#00A0E9",
+		"#072B45",
+	],
+
+	hembras: [
+		"#EFF1F4",
+		"#81C7EF",
+		"#2DC3BA",
+		"#BCEBD2",
+		"#F9F77A",
+		"#F8BDD3",
+		"#272928",
+	],
+
+	arabe: [
+		"#F19617",
+		"#251207",
+		"#15727F",
+		"#CEAB81",
+		"#BD3E36",
+	],
+
+	alfombra: [
+		"#D81D03",
+		"#101A9D",
+		"#1C7E4E",
+		"#F6A402",
+		"#EFD4BF",
+		"#E2E0EF",
+		"#050400",
 	],
 
 	rothko: [
