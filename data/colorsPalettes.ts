@@ -18,6 +18,22 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#E94A6A",
 	],
 
+	// Eyes 001 palette
+	eyes001: [
+		"#0795D0",
+		"#019C54",
+		"#F5230D",
+		"#DF5A48",
+		"#F1BF16",
+		"#F0C016",
+		"#F4850C",
+		"#E13E33",
+		"#746891",
+		"#623E86",
+		"#00A2C6",
+		"#EBD417",
+	],
+
 	// Eyes 004 palette
 	eyes004: [
 		"#D81D03",
