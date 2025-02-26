@@ -20,13 +20,13 @@ export const colorPalettes: { [key: string]: string[] } = {
 
 	// Eyes 004 palette
 	eyes004: [
-		"#D81D03", // Red
-		"#101A9D", // Blue
-		"#1C7E4E", // Green
-		"#F6A402", // Yellow
-		"#EFD4BF", // Beige
-		"#E2E0EF", // Light Purple
-		"#050400", // Black
+		"#D81D03",
+		"#101A9D",
+		"#1C7E4E",
+		"#F6A402",
+		"#EFD4BF",
+		"#E2E0EF",
+		"#050400",
 	],
 
 	III: [
@@ -37,6 +37,31 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#C81961",
 		"#373868",
 		"#FFF8DC",
+	],
+
+	circo: [
+		"#EBB858",
+		"#EEA8C1",
+		"#D0CBC3",
+		"#87B6C4",
+		"#EA4140",
+		"#5A5787",
+	],
+
+	azulejos: [
+		"#EE3425",
+		"#000000",
+		"#D3D3D3",
+		"#FEFEFE",
+	],
+
+	// Op_prob1 palette
+	op_prob1: [
+		"#E70012", // Red
+		"#D3A100", // Yellow/Gold
+		"#017160", // Green
+		"#00A0E9", // Blue
+		"#072B45", // Dark Blue
 	],
 
 	rothko: [
