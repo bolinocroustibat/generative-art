@@ -1,0 +1,11 @@
+/* Minimal CSS reset for full-window canvas */
+html, body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden; /* Prevents scrollbars */
+}
+
+/* Ensures the canvas is properly positioned */
+canvas {
+	display: block; /* Removes small gap at bottom of canvas */
+}

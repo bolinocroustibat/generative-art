@@ -1,5 +1,6 @@
 import p5 from "p5"
 import { colorPalettes } from "../data/colorsPalettes.ts"
+import { getCanvasDimensions } from "../helpers/canvasDimensions.ts"
 import { setupKeyboardControls } from "../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
@@ -9,7 +10,9 @@ const sketch = (p: p5) => {
 	const colors: string[] = colorPalettes.III
 
 	p.setup = (): void => {
-		p.createCanvas(960, 960, p.WEBGL)
+		// Use responsive dimensions
+		const dimensions = getCanvasDimensions(p)
+		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth(8)
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
@@ -32,21 +35,21 @@ const sketch = (p: p5) => {
 
 		const quads: p5.Vector[] = []
 		quads.push(p.createVector(0, 0, p.width))
-		
+
 		const sub = p.floor(p.random(p.random(40, 100)))
-		
+
 		for (let k = 0; k < sub; k++) {
 			const ind = p.floor(p.random(quads.length * p.random(1)))
 			const q = quads[ind]
 			const div = p.floor(p.random(2, 4))
 			const s = q.z / div
-			
+
 			for (let j = 0; j < div; j++) {
 				for (let i = 0; i < div; i++) {
 					quads.push(p.createVector(q.x + s * i, q.y + s * j, s))
 				}
 			}
-			
+
 			quads.splice(ind, 1)
 		}
 
@@ -54,7 +57,7 @@ const sketch = (p: p5) => {
 			const q = quads[i]
 			const div = p.floor(p.pow(2, p.floor(2 + p.random(4)))) * 2
 			const da = p.TWO_PI / div
-			
+
 			p.beginShape()
 			p.fill(rcol())
 			p.vertex(q.x, q.y)
@@ -63,7 +66,7 @@ const sketch = (p: p5) => {
 			p.vertex(q.x + q.z, q.y + q.z)
 			p.vertex(q.x, q.y + q.z)
 			p.endShape(p.CLOSE)
-			
+
 			const xx = q.x + q.z * 0.5
 			const yy = q.y + q.z * 0.5
 			const r = q.z * p.random(0.2, 0.9)
@@ -74,7 +77,7 @@ const sketch = (p: p5) => {
 			for (let j = 0; j < p1.length; j++) {
 				const i1 = j
 				const i2 = (j + 1) % p1.length
-				
+
 				p.fill(rcol())
 				p.beginShape()
 				p.fill(rcol())
@@ -88,16 +91,21 @@ const sketch = (p: p5) => {
 		}
 	}
 
-	const getRect = (x: number, y: number, s: number, sub: number): p5.Vector[] => {
+	const getRect = (
+		x: number,
+		y: number,
+		s: number,
+		sub: number,
+	): p5.Vector[] => {
 		const aux: p5.Vector[] = []
 		const r2 = s * 0.5 * p.sqrt(2)
-		
+
 		for (let i = 0; i < 4; i++) {
 			const x1 = p.cos((i + 0.5) * p.HALF_PI) * r2
 			const y1 = p.sin((i + 0.5) * p.HALF_PI) * r2
 			const x2 = p.cos((i + 1.5) * p.HALF_PI) * r2
 			const y2 = p.sin((i + 1.5) * p.HALF_PI) * r2
-			
+
 			for (let j = 0; j < sub / 4; j++) {
 				const xx = x + p.map(j, 0, sub / 4, x1, x2)
 				const yy = y + p.map(j, 0, sub / 4, y1, y2)
@@ -108,18 +116,25 @@ const sketch = (p: p5) => {
 		return aux
 	}
 
-	const getCircle = (x: number, y: number, s: number, sub: number): p5.Vector[] => {
+	const getCircle = (
+		x: number,
+		y: number,
+		s: number,
+		sub: number,
+	): p5.Vector[] => {
 		const r = s * 0.5
 		const aux: p5.Vector[] = []
 		const da = p.TWO_PI / sub
-		
+
 		for (let j = 0; j < sub; j++) {
-			aux.push(p.createVector(
-				x + p.cos(da * j + p.HALF_PI * 0.5) * r, 
-				y + p.sin(da * j + p.HALF_PI * 0.5) * r
-			))
+			aux.push(
+				p.createVector(
+					x + p.cos(da * j + p.HALF_PI * 0.5) * r,
+					y + p.sin(da * j + p.HALF_PI * 0.5) * r,
+				),
+			)
 		}
-		
+
 		return aux
 	}
 
@@ -145,7 +160,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "III"
+		algorithmName: "III",
 	})
 }
 
