@@ -39,16 +39,18 @@ This project contains a variety of generative art algorithms, each creating uniq
 
 ```
 generative-art/
-├── algorithms/           # Individual generative art algorithms
-├── data/                 # Shared data files
-│   └── colorsPalettes.ts # Color palettes for different algorithms
-├── helpers/              # Shared utility functions
+├── algorithms/              # Individual generative art algorithms
+├── data/                    # Shared data files
+│   └── colorsPalettes.ts    # Color palettes for different algorithms
+├── helpers/                 # Shared utility functions
 │   ├── canvasDimensions.ts  # Canvas sizing utilities
-│   ├── colorUtils.ts     # Color manipulation utilities
+│   ├── colorUtils.ts        # Color manipulation utilities
 │   ├── keyboardControls.ts  # Keyboard interaction utilities
-│   └── saveImage.ts      # Image saving utilities
-├── index.html            # Main HTML entry point
-└── style.css             # Global styles
+│   └── saveImage.ts         # Image saving utilities
+├── settings.ts              # Global settings (algorithm selection, canvas dimensions)
+├── main.ts                  # Main entry point that loads the selected algorithm
+├── index.html               # Main HTML entry point
+└── style.css                # Global styles
 ```
 
 ## Algorithms
@@ -77,31 +79,29 @@ Creates optical illusion patterns with checkerboard designs and noise-based vari
 
 ## Usage
 
-### Viewing Different Algorithms
+### Switching Algorithms
 
-To view a different algorithm, edit the `index.html` file and change the script source to point to the desired algorithm:
+To switch between algorithms, simply edit the `settings.ts` file and change the `CURRENT_ALGORITHM` value:
 
-```html
-<script type="module" src="algorithms/[algorithm-name]/index.ts"></script>
+```typescript
+export const CURRENT_ALGORITHM = "mondrian"
 ```
 
-Replace `[algorithm-name]` with the folder name of the algorithm you want to view.
+The value should match the name of the folder in the `algorithms` directory.
+
+### Canvas Dimensions
+
+You can set canvas dimensions by modifying the constants in `settings.ts`:
+
+```typescript
+// Canvas dimensions
+export const CANVAS_WIDTH = 960
+export const CANVAS_HEIGHT = 960
+```
+If these constants are commented out, the canvas will use the window dimensions.
 
 ### Keyboard Controls
 
 All sketches support the following keyboard controls:
-
 - **Space**: Generate a new variation with a random seed
 - **S**: Save the current canvas as a PNG image
-
-### Canvas Dimensions
-
-You can set fixed canvas dimensions by uncommenting and modifying the constants in `helpers/canvasDimensions.ts`:
-
-```typescript
-// Uncomment these lines to use fixed dimensions
-const CANVAS_WIDTH = 960
-const CANVAS_HEIGHT = 960
-```
-
-If these constants are commented out, the canvas will use the window dimensions.

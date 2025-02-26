@@ -7,7 +7,7 @@ import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
 const sketch = (p: p5) => {
 	let seed: number
 
-	const colors: string[] = colorPalettes.rothko
+	const colors: string[] = colorPalettes.III
 
 	p.setup = (): void => {
 		// Use responsive dimensions
