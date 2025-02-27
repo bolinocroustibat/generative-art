@@ -1,18 +1,22 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
+	let colors: string[] = []
 
-	const colors: string[] = getColorPalette()
-
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.smooth()
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -104,9 +108,9 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "eyes001"
+		algorithmName: "eyes001",
 	})
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)

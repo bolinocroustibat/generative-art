@@ -1,18 +1,23 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[] = []
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth()
 		p.pixelDensity(2)
 		p.rectMode(p.CENTER)
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -26,7 +31,7 @@ const sketch = (p: p5) => {
 		p.background(10) // Original comment: //getColor(random(colors.length)));
 
 		const fov = p.PI / p.random(1.01, p.random(1, 2.6))
-		const cameraZ = (p.height / 2.0) / p.tan(fov / 2.0)
+		const cameraZ = p.height / 2.0 / p.tan(fov / 2.0)
 		p.perspective(fov, p.width / p.height, cameraZ / 100.0, cameraZ * 100.0)
 		p.translate(p.width / 2, p.height / 2, 0)
 
@@ -44,7 +49,7 @@ const sketch = (p: p5) => {
 		// Create a list to store height segments
 		const hs: number[] = []
 		hs.push(hr * 2)
-		
+
 		const div = p.floor(p.random(80))
 		for (let i = 0; i < div; i++) {
 			const ind = p.floor(p.random(hs.length * p.random(1)))
@@ -59,16 +64,16 @@ const sketch = (p: p5) => {
 		p.stroke(255, 10)
 		// Original comment: //noStroke();
 		let h1 = -hr / 2
-		
+
 		for (let j = 0; j < hs.length; j++) {
 			const h2 = h1 + hs[j]
 			const ic = p.random(colors.length)
-			let dc = 3 + (colors.length * 1.0 / res) * p.floor(p.random(7)) // Original comment: //random(100)*random(1)*random(1);
-			
+			const dc = 3 + ((colors.length * 1.0) / res) * p.floor(p.random(7)) // Original comment: //random(100)*random(1)*random(1);
+
 			if (p.random(1) < 0.5) {
 				// Original comment: //dc = 3+random(0.03);
 			}
-			
+
 			for (let i = 0; i < res; i++) {
 				const x1 = p.cos(da * i) * radius
 				const y1 = p.sin(da * i) * radius
@@ -93,7 +98,7 @@ const sketch = (p: p5) => {
 					s1 = s2
 					s2 = 0
 				}
-				
+
 				p.stroke(255, 40)
 				p.beginShape()
 				p.fill(0, s1)
@@ -127,7 +132,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "circo"
+		algorithmName: "circo",
 	})
 }
 

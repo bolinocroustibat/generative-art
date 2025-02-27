@@ -1,17 +1,22 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[] = []
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.smooth()
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -40,17 +45,23 @@ const sketch = (p: p5) => {
 
 			p.noStroke()
 
-			p.fill(getColor(p.noise(di1 + x * dc1, di1 + y * dc1) * colors.length * 4))
+			p.fill(
+				getColor(p.noise(di1 + x * dc1, di1 + y * dc1) * colors.length * 4),
+			)
 			p.ellipse(x, y, s, s)
 
-			p.fill(getColor(p.noise(di2 + x * dc2, di2 + y * dc2) * colors.length * 4))
+			p.fill(
+				getColor(p.noise(di2 + x * dc2, di2 + y * dc2) * colors.length * 4),
+			)
 			p.ellipse(x, y, s2, s2)
 
 			for (let j = 0; j < 100; j++) {
 				const xx = p.random(p.width)
 				const yy = p.random(p.height)
 				const ss = p.width * p.random(0.003)
-				p.fill(getColor(p.noise(di3 + x * dc3, di3 + y * dc3) * colors.length * 4))
+				p.fill(
+					getColor(p.noise(di3 + x * dc3, di3 + y * dc3) * colors.length * 4),
+				)
 				p.ellipse(xx, yy, ss, ss)
 			}
 		}
@@ -62,7 +73,7 @@ const sketch = (p: p5) => {
 
 	const pelos = (): void => {
 		const cc = p.floor(p.random(160, 220))
-		const des = p.width * 1.0 / cc
+		const des = (p.width * 1.0) / cc
 		const ia = p.random(10000)
 		const da = p.random(0.01)
 		const is = p.random(10000)
@@ -71,7 +82,7 @@ const sketch = (p: p5) => {
 		const dc = p.random(0.001)
 		const init = p.random(colors.length)
 		const vel = p.random(colors.length)
-		
+
 		for (let j = 0; j < cc; j++) {
 			for (let i = 0; i < cc; i++) {
 				const xx = (i + p.random(-0.5, 0.5)) * des
@@ -93,17 +104,17 @@ const sketch = (p: p5) => {
 		if (v === undefined) {
 			v = p.random(colors.length)
 		}
-		
+
 		const value = p.abs(v)
 		const normalizedValue = value % colors.length
 		const c1 = p.color(colors[p.floor(normalizedValue % colors.length)])
 		const c2 = p.color(colors[p.floor((normalizedValue + 1) % colors.length)])
 		const result = p.lerpColor(c1, c2, normalizedValue % 1)
-		
+
 		if (alpha !== undefined) {
 			result.setAlpha(alpha)
 		}
-		
+
 		return result
 	}
 
@@ -113,9 +124,9 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "alfombra"
+		algorithmName: "alfombra",
 	})
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)

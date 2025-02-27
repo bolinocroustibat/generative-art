@@ -1,17 +1,22 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[] = []
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.smooth()
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -33,14 +38,14 @@ const sketch = (p: p5) => {
 			const ind = p.floor(p.random(rects.length * p.random(1)))
 			const r = rects[ind]
 			const div = p.floor(p.random(2, 6))
-			const ss = r.z * 1.0 / div
-			
+			const ss = (r.z * 1.0) / div
+
 			for (let y = 0; y < div; y++) {
 				for (let x = 0; x < div; x++) {
 					rects.push(p.createVector(r.x + x * ss, r.y + y * ss, ss))
 				}
 			}
-			
+
 			rects.splice(ind, 1)
 		}
 
@@ -51,7 +56,7 @@ const sketch = (p: p5) => {
 			const y = r.y
 			const s = r.z
 			const col = getColor()
-			
+
 			if (p.random(1) < 0.5) {
 				p.beginShape()
 				p.fill(p.lerpColor(col, getColor(), p.random(0.5)))
@@ -71,11 +76,11 @@ const sketch = (p: p5) => {
 				p.vertex(x + s, y + s)
 				p.endShape(p.CLOSE)
 			}
-			
+
 			// Original comment: //rect(x, y, r.z, r.z);
 			const div = p.floor(p.random(2, 16))
 			const ss = r.z / div
-			
+
 			for (let jj = 0; jj < div; jj++) {
 				for (let ii = 0; ii < div; ii++) {
 					const xx = x + ii * ss
@@ -96,17 +101,17 @@ const sketch = (p: p5) => {
 		if (v === undefined) {
 			v = p.random(colors.length)
 		}
-		
+
 		const value = p.abs(v)
 		const normalizedValue = value % colors.length
 		const c1 = p.color(colors[p.floor(normalizedValue % colors.length)])
 		const c2 = p.color(colors[p.floor((normalizedValue + 1) % colors.length)])
 		const result = p.lerpColor(c1, c2, normalizedValue % 1)
-		
+
 		if (alpha !== undefined) {
 			result.setAlpha(alpha)
 		}
-		
+
 		return result
 	}
 
@@ -116,7 +121,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "arabe"
+		algorithmName: "arabe",
 	})
 }
 

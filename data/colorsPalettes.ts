@@ -53,29 +53,11 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FFF8DC",
 	],
 
-	circo: [
-		"#EBB858",
-		"#EEA8C1",
-		"#D0CBC3",
-		"#87B6C4",
-		"#EA4140",
-		"#5A5787",
-	],
+	circo: ["#EBB858", "#EEA8C1", "#D0CBC3", "#87B6C4", "#EA4140", "#5A5787"],
 
-	azulejos: [
-		"#EE3425",
-		"#000000",
-		"#D3D3D3",
-		"#FEFEFE",
-	],
+	azulejos: ["#EE3425", "#000000", "#D3D3D3", "#FEFEFE"],
 
-	op_prob1: [
-		"#E70012",
-		"#D3A100",
-		"#017160",
-		"#00A0E9",
-		"#072B45",
-	],
+	op_prob1: ["#E70012", "#D3A100", "#017160", "#00A0E9", "#072B45"],
 
 	hembras: [
 		"#EFF1F4",
@@ -87,13 +69,7 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#272928",
 	],
 
-	arabe: [
-		"#F19617",
-		"#251207",
-		"#15727F",
-		"#CEAB81",
-		"#BD3E36",
-	],
+	arabe: ["#F19617", "#251207", "#15727F", "#CEAB81", "#BD3E36"],
 
 	alfombra: [
 		"#D81D03",
