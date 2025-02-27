@@ -1,28 +1,46 @@
 import type p5 from "p5"
 import { colorPalettes } from "../data/colorsPalettes.ts"
 import { COLOR_PALETTE } from "../settings.ts"
+import { getMoviePalette } from "./moviesPalettesApi"
 
-/**
- * Color utility functions for generative art
- */
+export const rgbToHex = (rgb: [number, number, number]): string => {
+	return `#${rgb
+		.map((x) => {
+			const hex = Math.round(Math.max(0, Math.min(255, x))).toString(16)
+			return hex.length === 1 ? `0${hex}` : hex
+		})
+		.join("")}`
+}
 
 /**
  * Returns the color palette specified in settings or a specified one
  * @param paletteName - Optional name of the palette to use (overrides the setting)
  * @returns Array of color strings
- * @throws Error if palette doesn't exist
+ * @throws Error if palette doesn't exist locally and can't be fetched from the API
  */
-export const getColorPalette = (paletteName?: string): string[] => {
+export const getColorPalette = async (
+	paletteName?: string,
+): Promise<string[]> => {
 	// Use the provided palette name or the COLOR_PALETTE from settings
 	const paletteToUse = paletteName || COLOR_PALETTE
-	
-	// Check if the requested palette exists
+
+	// Check if the requested palette exists locally
 	if (colorPalettes[paletteToUse]) {
+		console.log(`Using local color palette: "${paletteToUse}"`)
 		return colorPalettes[paletteToUse]
 	}
-	
-	// If palette doesn't exist, throw an error
-	throw new Error(`Color palette "${paletteToUse}" not found. Available palettes: ${Object.keys(colorPalettes).join(", ")}`)
+
+	console.log(`Local palette "${paletteToUse}" not found, trying movies API...`)
+	try {
+		// Try to fetch from the movies API as a fallback
+		const moviePalette = await getMoviePalette(paletteToUse)
+		return moviePalette
+	} catch (error) {
+		// If both local and API attempts fail, throw an error with all available local palettes
+		throw new Error(
+			`Color palette "${paletteToUse}" not found locally or in movies API. Available local palettes: ${Object.keys(colorPalettes).join(", ")}`,
+		)
+	}
 }
 
 /**

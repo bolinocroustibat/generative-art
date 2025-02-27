@@ -1,10 +1,14 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[] = []
 
 	// Box class equivalent to the Processing version
 	class Box {
@@ -15,7 +19,14 @@ const sketch = (p: p5) => {
 		h: number
 		d: number
 
-		constructor(x: number, y: number, z: number, w: number, h: number, d: number) {
+		constructor(
+			x: number,
+			y: number,
+			z: number,
+			w: number,
+			h: number,
+			d: number,
+		) {
 			this.x = x
 			this.y = y
 			this.z = z
@@ -25,17 +36,14 @@ const sketch = (p: p5) => {
 		}
 	}
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth()
 		p.pixelDensity(2)
-		
-		// In p5.js, we need to set these differently than Processing
-		// Processing's ENABLE_STROKE_PERSPECTIVE doesn't exist in p5.js
 		p.rectMode(p.CENTER)
-		
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -66,11 +74,11 @@ const sketch = (p: p5) => {
 			const ind = p.floor(p.random(boxes.length * p.random(0.2, 1)))
 			const b = boxes[ind]
 			const w1 = p.random(0.3, 0.7)
-			const w2 = (1 - w1)
+			const w2 = 1 - w1
 			const h1 = p.random(0.3, 0.7)
-			const h2 = (1 - h1)
+			const h2 = 1 - h1
 			const d1 = p.random(0.3, 0.7)
-			const d2 = (1 - d1)
+			const d2 = 1 - d1
 
 			const w = b.w
 			const h = b.h
@@ -83,15 +91,87 @@ const sketch = (p: p5) => {
 			const newD1 = d1 * d
 			const newD2 = d2 * d
 
-			boxes.push(new Box(b.x - w * 0.5 + newW1 * 0.5, b.y - h * 0.5 + newH1 * 0.5, b.z - d * 0.5 + newD1 * 0.5, newW1, newH1, newD1))
-			boxes.push(new Box(b.x + w * 0.5 - newW2 * 0.5, b.y - h * 0.5 + newH1 * 0.5, b.z - d * 0.5 + newD1 * 0.5, newW2, newH1, newD1))
-			boxes.push(new Box(b.x - w * 0.5 + newW1 * 0.5, b.y + h * 0.5 - newH2 * 0.5, b.z - d * 0.5 + newD1 * 0.5, newW1, newH2, newD1))
-			boxes.push(new Box(b.x + w * 0.5 - newW2 * 0.5, b.y + h * 0.5 - newH2 * 0.5, b.z - d * 0.5 + newD1 * 0.5, newW2, newH2, newD1))
+			boxes.push(
+				new Box(
+					b.x - w * 0.5 + newW1 * 0.5,
+					b.y - h * 0.5 + newH1 * 0.5,
+					b.z - d * 0.5 + newD1 * 0.5,
+					newW1,
+					newH1,
+					newD1,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x + w * 0.5 - newW2 * 0.5,
+					b.y - h * 0.5 + newH1 * 0.5,
+					b.z - d * 0.5 + newD1 * 0.5,
+					newW2,
+					newH1,
+					newD1,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x - w * 0.5 + newW1 * 0.5,
+					b.y + h * 0.5 - newH2 * 0.5,
+					b.z - d * 0.5 + newD1 * 0.5,
+					newW1,
+					newH2,
+					newD1,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x + w * 0.5 - newW2 * 0.5,
+					b.y + h * 0.5 - newH2 * 0.5,
+					b.z - d * 0.5 + newD1 * 0.5,
+					newW2,
+					newH2,
+					newD1,
+				),
+			)
 
-			boxes.push(new Box(b.x - w * 0.5 + newW1 * 0.5, b.y - h * 0.5 + newH1 * 0.5, b.z + d * 0.5 - newD2 * 0.5, newW1, newH1, newD2))
-			boxes.push(new Box(b.x + w * 0.5 - newW2 * 0.5, b.y - h * 0.5 + newH1 * 0.5, b.z + d * 0.5 - newD2 * 0.5, newW2, newH1, newD2))
-			boxes.push(new Box(b.x - w * 0.5 + newW1 * 0.5, b.y + h * 0.5 - newH2 * 0.5, b.z + d * 0.5 - newD2 * 0.5, newW1, newH2, newD2))
-			boxes.push(new Box(b.x + w * 0.5 - newW2 * 0.5, b.y + h * 0.5 - newH2 * 0.5, b.z + d * 0.5 - newD2 * 0.5, newW2, newH2, newD2))
+			boxes.push(
+				new Box(
+					b.x - w * 0.5 + newW1 * 0.5,
+					b.y - h * 0.5 + newH1 * 0.5,
+					b.z + d * 0.5 - newD2 * 0.5,
+					newW1,
+					newH1,
+					newD2,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x + w * 0.5 - newW2 * 0.5,
+					b.y - h * 0.5 + newH1 * 0.5,
+					b.z + d * 0.5 - newD2 * 0.5,
+					newW2,
+					newH1,
+					newD2,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x - w * 0.5 + newW1 * 0.5,
+					b.y + h * 0.5 - newH2 * 0.5,
+					b.z + d * 0.5 - newD2 * 0.5,
+					newW1,
+					newH2,
+					newD2,
+				),
+			)
+			boxes.push(
+				new Box(
+					b.x + w * 0.5 - newW2 * 0.5,
+					b.y + h * 0.5 - newH2 * 0.5,
+					b.z + d * 0.5 - newD2 * 0.5,
+					newW2,
+					newH2,
+					newD2,
+				),
+			)
 
 			boxes.splice(ind, 1)
 		}
@@ -120,7 +200,7 @@ const sketch = (p: p5) => {
 		const md = d * 0.5
 		const cc = 120
 		p.stroke(0, p.random(16, 70))
-		
+
 		for (let i = 0; i < cc; i++) {
 			const v = p.map(i, 0, cc - 1, -1, 1)
 			if (p.random(1) < 0.5) p.line(mw * v, -mh, -md, mw * v, +mh, +md)
@@ -160,7 +240,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "hembras"
+		algorithmName: "hembras",
 	})
 }
 

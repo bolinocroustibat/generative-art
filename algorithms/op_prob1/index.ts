@@ -1,5 +1,9 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
@@ -25,7 +29,7 @@ const sketch = (p: p5) => {
 
 		let cc = p.floor(p.random(12, 30)) * 2
 		cc = 30 // Override with fixed value as in original
-		const ss = p.width * 1.0 / cc
+		const ss = (p.width * 1.0) / cc
 
 		p.noStroke()
 		p.rectMode(p.CENTER)
@@ -49,7 +53,7 @@ const sketch = (p: p5) => {
 
 				if ((i + j) % 2 === 1) p.fill(0)
 				else p.fill(255)
-				
+
 				if (p.noise(des1 + i * det1, des1 + j * det1) < 0.5) {
 					p.rect(xx - ss * 0.3, yy - ss * 0.3, ss * 0.2, ss * 0.2)
 				}
@@ -120,9 +124,9 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "op_prob1"
+		algorithmName: "op_prob1",
 	})
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)

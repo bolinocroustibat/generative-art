@@ -1,10 +1,14 @@
 import p5 from "p5"
-import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers/index.ts"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers/index.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[] = []
 
 	// Rect class equivalent to the Processing version
 	class Rect {
@@ -21,11 +25,12 @@ const sketch = (p: p5) => {
 		}
 	}
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.pixelDensity(2)
 		seed = p.floor(p.random(999999)) // Initialize seed
+		colors = await getColorPalette()
 		generate()
 	}
 
@@ -43,14 +48,14 @@ const sketch = (p: p5) => {
 		const sc2 = rcol()
 		const sc3 = rcol()
 		const ss = p.width / 24
-		const cc = p.floor(p.width * 1.0 / ss)
+		const cc = p.floor((p.width * 1.0) / ss)
 
 		p.noStroke()
 		// Create a color with alpha
 		const fillColor = rcol()
 		fillColor.setAlpha(30)
 		p.fill(fillColor)
-		
+
 		for (let j = 0; j <= cc * 2; j++) {
 			for (let i = 0; i <= cc * 2; i++) {
 				const xx = i * ss * 0.5
@@ -67,18 +72,18 @@ const sketch = (p: p5) => {
 				const xx = (i + 1) * ss
 				const yy = (j + 1) * ss
 				p.noFill()
-				
+
 				// Create colors with alpha
 				const strokeColor1 = p.color(sc1.toString())
 				strokeColor1.setAlpha(30)
 				p.stroke(strokeColor1)
 				p.rect(xx, yy, ss, ss)
-				
+
 				const strokeColor2 = p.color(sc2.toString())
 				strokeColor2.setAlpha(30)
 				p.stroke(strokeColor2)
 				p.rect(xx, yy, ss * 0.9, ss * 0.9)
-				
+
 				p.noStroke()
 				const fillColor3 = p.color(sc3.toString())
 				fillColor3.setAlpha(200)
@@ -95,7 +100,9 @@ const sketch = (p: p5) => {
 		}
 
 		const rects: Rect[] = []
-		rects.push(new Rect(ss * 0.5, ss * 0.5, p.width - ss + 1, p.height - ss + 1))
+		rects.push(
+			new Rect(ss * 0.5, ss * 0.5, p.width - ss + 1, p.height - ss + 1),
+		)
 
 		const subh = p.floor(p.random(1, 50))
 		for (let i = 0; i < subh; i++) {
@@ -130,12 +137,12 @@ const sketch = (p: p5) => {
 			const h = r.h
 			const x = r.x
 			const y = r.y
-			
+
 			// Create a color with alpha
 			const borderColor = rcol()
 			borderColor.setAlpha(180)
 			p.fill(borderColor)
-			
+
 			p.rectMode(p.CORNER)
 			const s = 1
 			p.rect(x, y, w, s)
@@ -147,8 +154,8 @@ const sketch = (p: p5) => {
 			p.rectMode(p.CENTER)
 			if (rnd === 0) {
 				const sca = p.floor(p.pow(2, p.floor(p.random(0, 4))))
-				const cw = p.floor(w * sca / ss)
-				const ch = p.floor(h * sca / ss)
+				const cw = p.floor((w * sca) / ss)
+				const ch = p.floor((h * sca) / ss)
 				const sss = ss / sca
 				for (let j = 0; j < ch; j++) {
 					for (let i = 0; i < cw; i++) {
@@ -191,9 +198,9 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "azulejos"
+		algorithmName: "azulejos",
 	})
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)
