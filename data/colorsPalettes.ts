@@ -123,4 +123,12 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#0000FF", // Blue
 		"#FFFF00", // Yellow
 	],
+
+	// Golden palette
+	golden: [
+		"#db3b4b",
+		"#edd23b",
+		"#d4dbdd",
+		"#2172ba",
+	],
 }
