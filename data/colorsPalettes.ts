@@ -141,4 +141,13 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#00B187",
 		"#3DC1CD",
 	],
+
+	// Chime palette
+	chime: [
+		"#F4D3DE",
+		"#F7E843",
+		"#409746",
+		"#373787",
+		"#E12E29",
+	],
 }
