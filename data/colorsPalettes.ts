@@ -131,4 +131,14 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#d4dbdd",
 		"#2172ba",
 	],
+
+	// Chea palette
+	chea: [
+		"#FACD00",
+		"#FB4F00",
+		"#F277C5",
+		"#7D57C6",
+		"#00B187",
+		"#3DC1CD",
+	],
 }
