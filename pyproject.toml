@@ -1,12 +1,13 @@
 [project]
-name = "extract-dominant-colors"
+name = "generative-art-scripts"
 version = "0.0.1"
-description = "Extract dominant colors from an image"
+description = "Collection of Python scripts for generative art, including extraction of dominant colors from images and extraction of still images from videos"
 authors = [
     {name = "Adrien Carpentier", email = "me@adriencarpentier.com"},
 ]
 dependencies = [
     "matplotlib>=3.7.1",
+    "opencv-python>=4.8.0",
     "pandas>=2.0.2",
     "scipy>=1.9.3",
     "tqdm>=4.67.1",
@@ -19,4 +20,4 @@ line-length = 100
 lint = { extend-select = ["I"] }
 
 [tool.uv]
-dev-dependencies = ["ruff>=0.6.8",]
+dev-dependencies = ["ruff>=0.9.9",]
