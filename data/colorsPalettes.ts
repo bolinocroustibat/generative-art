@@ -116,7 +116,6 @@ export const colorPalettes: { [key: string]: string[] } = {
 	// https://mediachomp.com/akira-color-palette/
 	// https://www.facebook.com/colorpalette.cinema/
 
-	// Mondrian palette
 	mondrian: [
 		"#FFFFFF", // White (with higher weight in the original)
 		"#FF0000", // Red
@@ -124,30 +123,59 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FFFF00", // Yellow
 	],
 
-	// Golden palette
-	golden: [
-		"#db3b4b",
-		"#edd23b",
-		"#d4dbdd",
-		"#2172ba",
+	golden: ["#db3b4b", "#edd23b", "#d4dbdd", "#2172ba"],
+
+	chea: ["#FACD00", "#FB4F00", "#F277C5", "#7D57C6", "#00B187", "#3DC1CD"],
+
+	chime: ["#F4D3DE", "#F7E843", "#409746", "#373787", "#E12E29"],
+
+	// Wes Anderson's Grand Budapest Hotel
+	grandBudapest: [
+		"#F1BB7B",
+		"#FD6467",
+		"#5B1A18",
+		"#D67236",
+		"#E6A0C4",
+		"#C6CDF7",
 	],
 
-	// Chea palette
-	chea: [
-		"#FACD00",
-		"#FB4F00",
-		"#F277C5",
-		"#7D57C6",
-		"#00B187",
-		"#3DC1CD",
+	// Hokusai's The Great Wave
+	greatWave: ["#011F4B", "#03396C", "#005B96", "#6497B1", "#B3CDE0", "#FFFFFF"],
+
+	// Van Gogh's Starry Night
+	starryNight: [
+		"#1E3F66",
+		"#2E5C8A",
+		"#4A90E2",
+		"#FFD700",
+		"#FDB813",
+		"#C7B683",
 	],
 
-	// Chime palette
-	chime: [
-		"#F4D3DE",
-		"#F7E843",
-		"#409746",
-		"#373787",
-		"#E12E29",
-	],
+	// Japanese Cherry Blossom
+	sakura: ["#FFB7C5", "#FF8FA2", "#FFE5EC", "#674846", "#8D6449", "#FFFFFF"],
+
+	// Bauhaus inspired
+	bauhaus: ["#EC3E3E", "#0F71B8", "#FFDD00", "#000000", "#FFFFFF"],
+
+	// Northern Lights
+	aurora: ["#00796B", "#2E7D32", "#1976D2", "#512DA8", "#C2185B", "#1B5E20"],
+
+	// Art Deco
+	artDeco: ["#B8860B", "#000000", "#FFFFFF", "#B76E79", "#12395D", "#828282"],
+
+	// Studio Ghibli inspired
+	ghibli: ["#85D4E3", "#F4B674", "#9CD08F", "#EAAC8B", "#E8A0BF", "#86B3D1"],
+
+	// Memphis Design Movement
+	memphis: ["#FF6B6B", "#4ECDC4", "#FFE66D", "#2C3E50", "#FF9F1C", "#95A5A6"],
+
+	// Frida Kahlo inspired
+	frida: ["#E63946", "#1D3557", "#F1FAEE", "#A8DADC", "#457B9D", "#FFB703"],
+
+	// Cyberpunk
+	cyberpunk: ["#FF00FF", "#00FFFF", "#FF3366", "#33FF33", "#181818", "#FF9900"],
+
+	// Ukiyo-e prints
+	ukiyoe: ["#2C3B4F", "#B4436C", "#E7D6C3", "#F5C33B", "#88A0A8", "#C73E3A"],
 }
