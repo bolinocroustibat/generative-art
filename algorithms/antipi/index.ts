@@ -1,26 +1,20 @@
 import p5 from "p5"
-import { colorPalettes } from "../../data/colorsPalettes.ts"
 import { getCanvasDimensions } from "../../helpers/canvasDimensions.ts"
-import {
-	getInterpolatedColor,
-	getInterpolatedRandomColor,
-	getRandomColor,
-} from "../../helpers/colorUtils.ts"
+import { getColorPalette, getRandomColor } from "../../helpers/index.ts"
 import { setupKeyboardControls } from "../../helpers/keyboardControls.ts"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
 	let rects: p5.Vector[] = []
-	let colors: string[] // Variable to store the color palette
+	let colors: string[]
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
 		p.smooth(16)
 		p.pixelDensity(2)
-		// Initialize the colors from the imported palette
-		colors = colorPalettes.royalTenenbaums
+		colors = await getColorPalette()
 		seed = p.floor(p.random(999999)) // Initialize seed
 		generate()
 	}

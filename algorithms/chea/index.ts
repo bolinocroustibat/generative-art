@@ -131,4 +131,4 @@ const sketch = (p: p5) => {
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)
