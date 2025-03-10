@@ -1,5 +1,4 @@
 import { MOVIES_PALETTES_API_URL } from "../settings"
-import { rgbToHex } from "./colorUtils"
 
 interface MoviePaletteResponse {
 	movie: {
@@ -11,7 +10,7 @@ interface MoviePaletteResponse {
 	palettes: Array<{
 		id: string
 		active: number
-		colors: [number, number, number][]
+		colors: string[]
 		is_black_and_white: number
 		// Other fields omitted for brevity as they're not needed
 	}>
@@ -36,9 +35,7 @@ export const getMoviePalette = async (movieSlug: string): Promise<string[]> => {
 		console.log(
 			`Successfully fetched palette with ${data.palettes[0].colors.length} colors`,
 		)
-		return data.palettes[0].colors.map((color: [number, number, number]) =>
-			rgbToHex(color),
-		)
+		return data.palettes[0].colors
 	} catch (error) {
 		console.error(`Failed to fetch movie palette: ${error}`)
 		throw error
