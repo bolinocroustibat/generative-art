@@ -1,9 +1,7 @@
----
-description: 
-globs: 
-alwaysApply: false
----
-# p5.js WEBGL Mode Conversion Rules
+# Processing to p5.js WEBGL Mode Conversion Rules
+
+description: Rules for converting Processing sketches to p5.js WEBGL mode and handling coordinate system differences
+matches: algorithms/**/*.ts
 
 ## Coordinate System Differences
 
@@ -13,50 +11,82 @@ When converting from Processing to p5.js WEBGL mode, be aware of these fundament
 // Processing
 // Origin (0,0) at top-left
 // +Y goes down
+// Fixed multipliers work well (e.g., width*1.0, -1000 for camera)
 ```
 
 ```javascript
 // p5.js WEBGL
 // Origin (0,0) at center
 // +Y goes up
+// Need to scale everything with canvas size
 ```
 
-## Translation Adjustments
+## Camera and View Setup
 
-When converting translations from Processing to p5.js WEBGL:
+1. **Orthographic Projection**
+   ```javascript
+   // Use explicit parameters for better control
+   const zoom = 1.2
+   p.ortho(
+       -p.width / 2 * zoom,  // left
+       p.width / 2 * zoom,   // right
+       -p.height / 2 * zoom, // bottom
+       p.height / 2 * zoom,  // top
+       0,                    // near
+       p.max(p.width, p.height) * 4 // far
+   )
+   ```
 
-```processing
-// Processing
-translate(width/2, height/2, z);
-```
+2. **Camera Position**
+   ```javascript
+   // Scale camera distance with canvas size
+   const cameraDistance = p.max(p.width, p.height) * 1.5
+   
+   // Move camera up to compensate for WEBGL's Y-axis
+   p.translate(0, -p.height * 0.25, -cameraDistance)
+   ```
 
-```javascript
-// p5.js WEBGL
-translate(0, 0, z); // Origin is already centered
-// If patterns appear too low:
-translate(0, -height * 0.3, z); // Move camera up
-```
+3. **Initial Object Size**
+   ```javascript
+   // Scale initial size with canvas
+   const initialSize = p.max(p.width, p.height) * 1.5
+   ```
 
-## Camera/View Setup
+## Scaling Guidelines
 
-Important considerations for camera setup:
-- Processing's coordinate system is more intuitive for top-down views
-- p5.js WEBGL may need Y-axis adjustments to match Processing's output
-- Keep rotations (rotateX, rotateZ) the same as they work consistently
+1. **Replace Fixed Multipliers**
+   ```processing
+   // Processing
+   translate(width/2, height/2, -1000);
+   rect(-width*1.0, -height*1.0, width*2);
+   ```
+
+   ```javascript
+   // p5.js WEBGL
+   const size = p.max(p.width, p.height)
+   p.translate(0, -p.height * 0.25, -size * 1.5);
+   p.createVector(-size * 1.5, -size * 1.5, size * 3);
+   ```
+
+2. **Minimum Size Thresholds**
+   ```javascript
+   // Scale minimum sizes with canvas
+   if (ms < p.max(p.width, p.height) * 0.1) continue;
+   ```
 
 ## Common Issues and Fixes
 
 1. **Patterns appear at bottom**
-   - Solution: Adjust Y translation up
+   - Solution: Add vertical offset in camera translation
    ```javascript
-   translate(0, -height * 0.3, z);
+   p.translate(0, -p.height * 0.25, z);
    ```
 
-2. **Patterns are inverted**
-   - Solution: Check Y-axis calculations
+2. **Patterns are too small/large**
+   - Solution: Scale all size values with canvas
    ```javascript
-   // Ensure Y values are negated when needed
-   y = -y; // Example adjustment
+   const size = p.max(p.width, p.height);
+   // Use size * multiplier instead of fixed values
    ```
 
 3. **Patterns are off-center**
@@ -64,4 +94,29 @@ Important considerations for camera setup:
    ```javascript
    // No need for manual centering with width/2, height/2
    translate(0, 0, z);
-   ``` 
+   ```
+
+## Specific Rules for WEBGL Mode
+
+1. Always use `p.WEBGL` when creating canvas:
+   ```javascript
+   p.createCanvas(width, height, p.WEBGL);
+   ```
+
+2. Remove `p.smooth()` arguments as p5.js doesn't support them:
+   ```javascript
+   // Instead of p.smooth(8), use:
+   p.smooth();
+   ```
+
+3. For orthographic projection, use explicit parameters:
+   ```javascript
+   p.ortho(
+       -p.width / 2 * zoom,
+       p.width / 2 * zoom,
+       -p.height / 2 * zoom,
+       p.height / 2 * zoom,
+       0,
+       p.max(p.width, p.height) * 4
+   );
+   ```
