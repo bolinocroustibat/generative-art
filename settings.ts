@@ -1,14 +1,17 @@
 // Canvas dimensions
-export const CANVAS_WIDTH = 960
-export const CANVAS_HEIGHT = 960
+// Instagram Stories: 9:16 aspect ratio, 1080x1920 resolution
+export const CANVAS_WIDTH = 1080
+export const CANVAS_HEIGHT = 1920
 
 // Current algorithm to display
 // Change this value to switch between algorithms
-export const CURRENT_ALGORITHM = "chime"
+// Format: "algorithm" or "algorithm/file"
+// Examples: "paper" (uses paper/index.ts) or "paper/paper2" (uses paper/paper2.ts)
+export const CURRENT_ALGORITHM = "abstracactact"
 
 // Color palette to use
 // This is completely independent from the algorithm
-export const COLOR_PALETTE = "chime"
+export const COLOR_PALETTE = "ghibli"
 
 export const MOVIES_PALETTES_API_URL =
 	"https://movies-palettes.adriencarpentier.com/api"

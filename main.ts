@@ -3,8 +3,14 @@ import { CURRENT_ALGORITHM } from "./settings"
 
 console.log(`Loading algorithm: "${CURRENT_ALGORITHM}"`)
 
+// Handle file paths within algorithm folders
+const algorithmPath = CURRENT_ALGORITHM.includes("/")
+	? `./algorithms/${CURRENT_ALGORITHM}.ts`
+	: `./algorithms/${CURRENT_ALGORITHM}/index.ts`
+
 // Dynamically import the selected algorithm
-import(`./algorithms/${CURRENT_ALGORITHM}/index.ts`)
+/* @vite-ignore */
+import(algorithmPath)
 	.then(() => {
 		console.log(`Algorithm "${CURRENT_ALGORITHM}" loaded successfully.`)
 	})
