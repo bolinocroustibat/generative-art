@@ -3,5 +3,19 @@
 		"formatter": {
 			"semicolons": "asNeeded"
 		}
+	},
+	"files": {
+		"ignore": [
+			".venv/**/*",
+			".vscode/**/*",
+			".cursor/**/*",
+			"node_modules/**/*",
+			"dist/**/*",
+			"build/**/*",
+			".git/**/*",
+			"extract-dominant-colors/**/*",
+			"extract-still-image/**/*",
+			"images-average-gan/**/*"
+		]
 	}
 }

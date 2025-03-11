@@ -1,5 +1,10 @@
 import p5 from "p5"
-import { getCanvasDimensions, getColorPalette, setupKeyboardControls, getRandomColor } from "../../helpers"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	getRandomColor,
+	setupKeyboardControls,
+} from "../../helpers"
 
 let seed: number
 let colors: string[]
@@ -32,15 +37,15 @@ const sketch = (p: p5) => {
 	// Custom trembling box function that creates a sketchy effect
 	const tremblingBox = (w: number, h: number, d: number, tremble = 0.05) => {
 		const trembleAmount = 1 + tremble
-		
+
 		// Draw multiple boxes with slight variations
 		for (let i = 0; i < 3; i++) {
 			p.push()
 			// Apply random scaling for trembling effect
 			p.scale(
-				p.random(1/trembleAmount, trembleAmount),
-				p.random(1/trembleAmount, trembleAmount),
-				p.random(1/trembleAmount, trembleAmount)
+				p.random(1 / trembleAmount, trembleAmount),
+				p.random(1 / trembleAmount, trembleAmount),
+				p.random(1 / trembleAmount, trembleAmount),
 			)
 			// Add slight rotation for more organic feel
 			p.rotateX(p.random(-tremble, tremble))
@@ -60,24 +65,24 @@ const sketch = (p: p5) => {
 		p.directionalLight(20, 20, 20, 0, 1, 0)
 		p.directionalLight(10, 10, 20, -1, 0, 0)
 		p.noStroke()
-		
+
 		// Set up orthographic projection with explicit parameters to control the view
 		const zoom = 1.2
 		p.ortho(
-			-p.width / 2 * zoom,  // left
-			p.width / 2 * zoom,   // right
-			-p.height / 2 * zoom, // bottom
-			p.height / 2 * zoom,  // top
-			0,                    // near
-			p.max(p.width, p.height) * 4 // far
+			(-p.width / 2) * zoom, // left
+			(p.width / 2) * zoom, // right
+			(-p.height / 2) * zoom, // bottom
+			(p.height / 2) * zoom, // top
+			0, // near
+			p.max(p.width, p.height) * 4, // far
 		)
-		
+
 		// Scale camera distance with canvas size
 		const cameraDistance = p.max(p.width, p.height) * 1.5
-		
+
 		// Move the camera up to compensate for WEBGL's Y-axis direction
 		p.translate(0, -p.height * 0.25, -cameraDistance)
-		
+
 		// Rotate to match Processing's view, but adjust for WEBGL's Y-axis
 		p.rotateX(p.HALF_PI - p.atan(1 / p.sqrt(2)))
 		p.rotateZ(-p.HALF_PI * p.random(0.5))
@@ -164,4 +169,4 @@ const sketch = (p: p5) => {
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)
