@@ -1,5 +1,9 @@
 import p5 from "p5"
-import { getCanvasDimensions, setupKeyboardControls, getColorPalette } from "../../helpers"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers"
 
 let seed: number
 let colors: string[]
@@ -32,9 +36,11 @@ const sketch = (p: p5) => {
 			// Get new colors on each generation
 			primaryColor = p.color(colors[p.floor(p.random(colors.length))])
 			secondaryColor = p.color(colors[p.floor(p.random(colors.length))])
-			while (p.red(primaryColor) === p.red(secondaryColor) && 
-				   p.green(primaryColor) === p.green(secondaryColor) && 
-				   p.blue(primaryColor) === p.blue(secondaryColor)) {
+			while (
+				p.red(primaryColor) === p.red(secondaryColor) &&
+				p.green(primaryColor) === p.green(secondaryColor) &&
+				p.blue(primaryColor) === p.blue(secondaryColor)
+			) {
 				secondaryColor = p.color(colors[p.floor(p.random(colors.length))])
 			}
 			generate()
