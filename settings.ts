@@ -11,7 +11,7 @@ export const CURRENT_ALGORITHM = "order/order4"
 
 // Color palette to use
 // This is completely independent from the algorithm
-export const COLOR_PALETTE = "rothko"
+export const COLOR_PALETTE = "darjeelingLimited"
 
 export const MOVIES_PALETTES_API_URL =
 	"https://movies-palettes.adriencarpentier.com/api"
