@@ -54,41 +54,20 @@ generative-art/
 └── style.css                # Global styles
 ```
 
-## Algorithms
-
-### Azulejos
-
-A generative algorithm inspired by Portuguese azulejos tiles, creating geometric patterns with recursive subdivision.
-
-![Azulejos Example](output/azulejos_2025-02-26_19-23-19.png)
-
-### Circo
-
-Creates 3D cylindrical structures with color interpolation and random height segments.
-
-### Eyes_004
-
-Generates eye-like patterns with concentric circles and arcs, creating an organic, watching effect.
-
-### Mondrian
-
-Inspired by Piet Mondrian's neoplasticism style, generating compositions with primary colors and black grid lines.
-
-### Op_prob1
-
-Creates optical illusion patterns with checkerboard designs and noise-based variations.
-
 ## Usage
 
 ### Switching Algorithms
 
-To switch between algorithms, simply edit the `settings.ts` file and change the `CURRENT_ALGORITHM` value:
+To switch between algorithms, modify the `CURRENT_ALGORITHM` value in `settings.ts`. You can specify either an algorithm folder or a specific file within an algorithm folder:
 
 ```typescript
-export const CURRENT_ALGORITHM = "mondrian"
+// Format: "algorithm" or "algorithm/file"
+// Examples:
+export const CURRENT_ALGORITHM = "paper"     // Uses algorithms/paper/index.ts
+export const CURRENT_ALGORITHM = "paper/paper2"  // Uses algorithms/paper/paper2.ts
 ```
 
-The value should match the name of the folder in the `algorithms` directory.
+When only the algorithm name is provided (e.g., "paper"), the system will use the `index.ts` file from that algorithm's folder. To use a different file within the algorithm folder, specify it after a forward slash (e.g., "paper/paper2").
 
 ### Canvas Dimensions
 
