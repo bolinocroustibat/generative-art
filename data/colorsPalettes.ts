@@ -87,7 +87,6 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#000000", // Black
 		"#FF6700", // Orange
 		"#FFC72C", // Yellow
-		"#FFFFFF", // White
 		"#FF0000", // Red
 		"#800080", // Purple
 		"#000080", // Navy
@@ -95,6 +94,7 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FFFF00", // Yellow
 		"#FF69B4", // Pink
 		"#8B4513", // Saddle Brown
+		"#FFFFFF", // White
 	],
 
 	royalTenenbaums: [
