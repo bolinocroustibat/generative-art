@@ -178,4 +178,7 @@ export const colorPalettes: { [key: string]: string[] } = {
 
 	// Ukiyo-e prints
 	ukiyoe: ["#2C3B4F", "#B4436C", "#E7D6C3", "#F5C33B", "#88A0A8", "#C73E3A"],
+
+	// Order palette
+	order: ["#FFFCF7", "#FDDA02", "#EE78AC", "#3155A3", "#028B88"],
 }
