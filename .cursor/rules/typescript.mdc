@@ -4,6 +4,94 @@ globs: ["**/*.ts"]
 alwaysApply: false
 ---
 
+# TypeScript Configuration and Best Practices
+
+## Code Style and Formatting
+
+We use [Biome](mdc:https:/biomejs.dev) for linting and formatting. Biome is an all-in-one toolchain for web projects that handles both formatting and linting.
+
+### Running Biome
+
+```bash
+# Format and lint files
+biome check --write .
+```
+
+### Key Biome Rules
+
+We follow Biome's recommended ruleset, which includes:
+
+1. TypeScript-specific rules:
+   - `noExplicitAny`: Disallow explicit any
+   - `noUnsafeDeclarationMerging`: Prevent unsafe declaration merging
+   - `useNamespaceKeyword`: Use namespace instead of module for TypeScript namespaces
+
+2. Code style:
+   - Consistent spacing and indentation
+   - Semicolons only when needed (custom rule)
+   - Consistent quotes and comma style
+
+3. Best practices:
+   - `useIsArray`: Prefer Array.isArray() over instanceof Array
+   - `noVar`: Use let/const instead of var
+   - `useOptionalChain`: Encourage use of optional chaining
+   - `useArrowFunction`: Prefer arrow functions when appropriate
+
+## TypeScript Configuration
+
+```typescript
+// tsconfig.json key settings
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "jsxImportSource": "react",
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noPropertyAccessFromIndexSignature": false
+    }
+}
+```
+
+## Project Structure
+
+1. Use explicit file extensions:
+```typescript
+// Do
+import { something } from "./file.ts"
+import { component } from "./Component.tsx"
+
+// Don't
+import { something } from "./file"
+```
+
+2. Organize imports:
+```typescript
+// External dependencies first
+import p5 from "p5"
+
+// Then internal modules
+import { getCanvasDimensions } from "../../helpers"
+```
+
+## Type Safety
+
+1. Enable strict mode and related flags
+2. Use explicit return types for functions
+3. Avoid type assertions unless absolutely necessary
+4. Use proper type narrowing with type guards
+
+For more details on Biome rules and configuration, refer to:
+- [Biome Rules Documentation](mdc:https:/biomejs.dev/linter/rules)
+- [Biome Getting Started Guide](mdc:https:/biomejs.dev/guides/getting-started)
+
 # TypeScript Rules
 
 ## Type Definitions
