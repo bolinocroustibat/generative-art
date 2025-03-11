@@ -7,11 +7,11 @@ export const CANVAS_HEIGHT = 960
 // Change this value to switch between algorithms
 // Format: "algorithm" or "algorithm/file"
 // Examples: "paper" (uses paper/index.ts) or "paper/paper2" (uses paper/paper2.ts)
-export const CURRENT_ALGORITHM = "order"
+export const CURRENT_ALGORITHM = "order/order3"
 
 // Color palette to use
 // This is completely independent from the algorithm
-export const COLOR_PALETTE = "bauhaus"
+export const COLOR_PALETTE = "ukiyoe"
 
 export const MOVIES_PALETTES_API_URL =
 	"https://movies-palettes.adriencarpentier.com/api"
