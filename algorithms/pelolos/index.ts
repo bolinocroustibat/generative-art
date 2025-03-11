@@ -1,5 +1,9 @@
 import p5 from "p5"
-import { getCanvasDimensions, getColorPalette, setupKeyboardControls } from "../../helpers"
+import {
+	getCanvasDimensions,
+	getColorPalette,
+	setupKeyboardControls,
+} from "../../helpers"
 
 let seed: number
 let colors: string[]
@@ -81,11 +85,15 @@ const sketch = (p: p5) => {
 			for (let j = 0; j < mountain.length - 1; j++) {
 				const p1 = mountain[j]
 				const p2 = mountain[j + 1]
-				
+
 				// Create smoother color transitions
 				const progressJ = j / mountain.length
-				const col1 = getInterpolatedColor(baseIndex + progressJ * colorStep * colors.length)
-				const col2 = getInterpolatedColor(baseIndex + (progressJ + colorStep) * colors.length)
+				const col1 = getInterpolatedColor(
+					baseIndex + progressJ * colorStep * colors.length,
+				)
+				const col2 = getInterpolatedColor(
+					baseIndex + (progressJ + colorStep) * colors.length,
+				)
 
 				// Add alpha variation for more depth
 				const alpha1 = p.map(p1.y, 0, p.height, 255, 180)
