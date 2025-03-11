@@ -1,0 +1,20 @@
+// Processing to p5.js WEBGL Mode Conversion Rules
+
+1. Coordinate System Differences:
+   - Processing: Origin (0,0) at top-left, +Y goes down
+   - p5.js WEBGL: Origin (0,0) at center, +Y goes up
+   
+2. Translation Adjustments:
+   - When converting translate(width/2, height/2, z) from Processing:
+     - In p5.js WEBGL: Use translate(0, 0, z) since origin is already centered
+     - If patterns appear too low, use translate(0, -height * 0.3, z) to move camera up
+
+3. Camera/View Setup:
+   - Processing's coordinate system is more intuitive for top-down views
+   - p5.js WEBGL may need Y-axis adjustments to match Processing's output
+   - Keep rotations (rotateX, rotateZ) the same as they work consistently
+
+4. Common Fixes:
+   - If patterns appear at bottom: Adjust Y translation up
+   - If patterns are inverted: Check Y-axis calculations
+   - If patterns are off-center: Remember WEBGL mode auto-centers the origin
