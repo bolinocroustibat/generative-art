@@ -1,0 +1,80 @@
+---
+description: TypeScript configuration and best practices for p5.js with strict typing
+globs: ["**/*.ts"]
+alwaysApply: false
+---
+
+# TypeScript Rules
+
+## Type Definitions
+
+1. Always use proper p5.js type definitions:
+```typescript
+import p5 from "p5"
+
+const sketch = (p: p5) => {
+    // Your sketch code here
+}
+```
+
+2. Use proper types for vectors and colors:
+```typescript
+// Vectors
+const position: p5.Vector = p.createVector(x, y, z)
+
+// Colors
+const color: p5.Color = p.color(r, g, b)
+```
+
+## Best Practices
+
+1. Always type async functions:
+```typescript
+p.setup = async (): Promise<void> => {
+    // Setup code
+}
+```
+
+2. Use explicit return types:
+```typescript
+const generate = (): void => {
+    // Generation code
+}
+
+const calculateDistance = (x1: number, y1: number, x2: number, y2: number): number => {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
+}
+```
+
+3. Type array declarations:
+```typescript
+const points: p5.Vector[] = []
+const colors: string[] = []
+```
+
+## Strict TypeScript Settings
+
+The following strict settings are enabled:
+- `strict: true`
+- `noImplicitAny: true`
+- `strictNullChecks: true`
+- `strictFunctionTypes: true`
+- `strictPropertyInitialization: true`
+- `noImplicitThis: true`
+- `alwaysStrict: true`
+
+## Error Prevention
+
+1. Always check for null/undefined:
+```typescript
+if (colors && colors.length > 0) {
+    const color = colors[p.floor(p.random(colors.length))]
+}
+```
+
+2. Use type guards when necessary:
+```typescript
+if (typeof value === "number") {
+    return value * 2
+}
+```

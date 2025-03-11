@@ -1,0 +1,94 @@
+---
+description: Project-specific patterns and conventions for p5.js generative art algorithms
+globs: ["algorithms/**/*.ts", "helpers/**/*.ts"]
+alwaysApply: true
+---
+
+# Project-Specific Rules for p5.js Generative Art
+
+## Project Structure
+
+1. Algorithm organization:
+```typescript
+// algorithms/[algorithmName]/index.ts
+import { getCanvasDimensions, getColorPalette, getRandomColor, setupKeyboardControls } from "../../helpers"
+```
+
+## Color Management
+
+1. Color palette handling:
+```typescript
+// Import color utilities
+import { getColorPalette, getRandomColor } from "../../helpers"
+
+// Declare colors at module scope
+let colors: string[]
+
+// Initialize in setup
+p.setup = async (): Promise<void> => {
+    colors = await getColorPalette()
+}
+
+// Use colors in your sketch
+const color = getRandomColor(p, colors)
+```
+
+## Canvas Setup
+
+1. Standard canvas initialization:
+```typescript
+const dimensions = getCanvasDimensions(p)
+p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
+p.pixelDensity(2)
+```
+
+## Keyboard Controls
+
+1. Standard keyboard control setup:
+```typescript
+p.keyPressed = setupKeyboardControls(p, {
+    generateFn: () => {
+        seed = p.floor(p.random(999999))
+        generate()
+    },
+    algorithmName: "yourAlgorithm"
+})
+```
+
+## Algorithm Pattern
+
+1. Standard algorithm structure:
+```typescript
+const sketch = (p: p5) => {
+    let seed: number
+    let colors: string[]
+
+    p.setup = async (): Promise<void> => {
+        // Canvas setup
+        const dimensions = getCanvasDimensions(p)
+        p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
+        p.pixelDensity(2)
+        
+        // Initialize colors and seed
+        colors = await getColorPalette()
+        seed = p.floor(p.random(999999))
+        generate()
+    }
+
+    const generate = (): void => {
+        p.randomSeed(seed)
+        // Your generative art logic here
+    }
+
+    // Set up keyboard controls
+    p.keyPressed = setupKeyboardControls(p, {
+        generateFn: () => {
+            seed = p.floor(p.random(999999))
+            generate()
+        },
+        algorithmName: "yourAlgorithm"
+    })
+}
+
+new p5(sketch)
+```
