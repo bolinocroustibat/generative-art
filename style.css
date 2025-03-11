@@ -3,10 +3,20 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-	overflow: hidden; /* Prevents scrollbars */
+	overflow: auto; /* Allow scrolling */
+	min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+/* Center the canvas horizontally */
+body {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start; /* Align to top */
+	background: #f0f0f0; /* Light gray background to see canvas bounds */
 }
 
 /* Ensures the canvas is properly positioned */
 canvas {
 	display: block; /* Removes small gap at bottom of canvas */
+	margin: 0 auto; /* Center horizontally */
 }
