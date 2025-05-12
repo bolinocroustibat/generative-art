@@ -226,4 +226,62 @@ export const colorPalettes: { [key: string]: string[] } = {
 	isleOfDogs: [
 		"#9986A5", "#79402E", "#CCBA72", "#0F0D0E", "#D9D0D3", "#8D8680"
 	],
+
+	caretonga: [
+		"#2F2C3B", // Dark blue-gray
+		"#F57281", // Pink
+		"#EAEAEA", // Light gray
+		"#EAEAEA", // Light gray (duplicate in original)
+	],
+
+	cables: [
+		"#1E1E1E",
+		"#5A5A5A",
+		"#FFFFFF",
+	],
+
+	arcos: [
+		"#FF0000",
+		"#00FF00",
+		"#0000FF",
+		"#FFFF00",
+		"#FF00FF",
+		"#00FFFF",
+	],
+
+	arboles: [
+		"#4B9EFF",
+		"#000000",
+	],
+
+	helados: [
+		"#FFB7B7", // -13774701
+		"#FFEEBB", // -74949
+		"#FFE7EF", // -1204433
+		"#FFB7CA", // -5076934
+		"#FFEEB1", // -80463
+		"#FFEEA1", // -94591
+	],
+
+	circulos: [
+		"#F73F09",
+		"#004D51",
+		"#008280",
+		"#00B9B5",
+	],
+
+	circulos2: [
+		"#F73F09",
+		"#004D51",
+		"#008280",
+		"#00B9B5",
+	],
+
+	circulosdentrocirculos2: [
+		"#163440",
+		"#28A199",
+		"#70CCAD",
+		"#CAFAC3",
+		"#FFFACC",
+	],
 }
