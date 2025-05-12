@@ -19,8 +19,6 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
-	p.draw = (): void => {}
-
 	const generate = (): void => {
 		p.randomSeed(seed)
 		p.background(rcol())

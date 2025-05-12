@@ -19,8 +19,6 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
-	p.draw = (): void => {}
-
 	const generate = (): void => {
 		p.randomSeed(seed)
 		p.background(rcol())
@@ -60,15 +58,64 @@ const sketch = (p: p5) => {
 
 	const drawCRTScreen = (x: number, y: number, s: number, mx: number, my: number): void => {
 		p.beginShape()
-		// Top
-		p.vertex(x - s * 0.9, y - s * 0.7)
-		p.bezierVertex(x - s * 0.9, y - s * 0.9, x - s * 0.7, y - s * 0.9, x, y - s * 0.9)
-		p.bezierVertex(x + s * 0.7, y - s * 0.9, x + s * 0.9, y - s * 0.9, x + s * 0.9, y - s * 0.7)
-		// Right
-		p.vertex(x + s * 0.9, y + s * 0.7)
-		p.bezierVertex(x + s * 0.9, y + s * 0.9, x + s * 0.7, y + s * 0.9, x, y + s * 0.9)
-		// Bottom
-		p.bezierVertex(x - s * 0.7, y + s * 0.9, x - s * 0.9, y + s * 0.9, x - s * 0.9, y + s * 0.7)
+		
+		// Left side (curved outward)
+		p.vertex(x - s * 1.2, y - s * 0.7)
+		p.bezierVertex(
+			x - s * 1.23, y - s * 0.7,  // control point 1
+			x - s * 1.23, y + s * 0.7,  // control point 2
+			x - s * 1.2, y + s * 0.7   // end point
+		)
+
+		// Bottom left corner
+		p.bezierVertex(
+			x - s * 1.2, y + s * 0.8,  // control point 1
+			x - s * 1.1, y + s * 0.9,  // control point 2
+			x - s * 0.9, y + s * 0.9   // end point
+		)
+
+		// Bottom side (curved outward)
+		p.bezierVertex(
+			x - s * 0.9, y + s * 0.93,  // control point 1
+			x + s * 0.9, y + s * 0.93,  // control point 2
+			x + s * 0.9, y + s * 0.9   // end point
+		)
+
+		// Bottom right corner
+		p.bezierVertex(
+			x + s * 1.1, y + s * 0.9,  // control point 1
+			x + s * 1.2, y + s * 0.8,  // control point 2
+			x + s * 1.2, y + s * 0.7   // end point
+		)
+
+		// Right side (curved outward)
+		p.bezierVertex(
+			x + s * 1.23, y + s * 0.7,  // control point 1
+			x + s * 1.23, y - s * 0.7,  // control point 2
+			x + s * 1.2, y - s * 0.7   // end point
+		)
+
+		// Top right corner
+		p.bezierVertex(
+			x + s * 1.2, y - s * 0.8,  // control point 1
+			x + s * 1.1, y - s * 0.9,  // control point 2
+			x + s * 0.9, y - s * 0.9   // end point
+		)
+
+		// Top side (curved outward)
+		p.bezierVertex(
+			x + s * 0.9, y - s * 0.93,  // control point 1
+			x - s * 0.9, y - s * 0.93,  // control point 2
+			x - s * 0.9, y - s * 0.9   // end point
+		)
+
+		// Top left corner
+		p.bezierVertex(
+			x - s * 1.1, y - s * 0.9,  // control point 1
+			x - s * 1.2, y - s * 0.8,  // control point 2
+			x - s * 1.2, y - s * 0.7   // end point
+		)
+
 		p.endShape(p.CLOSE)
 	}
 
@@ -76,7 +123,7 @@ const sketch = (p: p5) => {
 		p.fill(p.color("#EADBC6"))
 		drawCRTScreen(x, y, s * 0.6, s * 0.3, s * 0.2)  // Reduced size to 60% of original
 	}
- 
+
 	const rcol = (): p5.Color => {
 		return p.color(colors[p.floor(p.random(colors.length))])
 	}

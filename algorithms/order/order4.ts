@@ -21,10 +21,6 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
-	p.draw = () => {
-		// Empty draw function as in original
-	}
-
 	// Set up keyboard controls with our custom generate function
 	p.keyPressed = setupKeyboardControls(p, {
 		generateFn: () => {

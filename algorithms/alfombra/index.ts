@@ -20,11 +20,6 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
-	p.draw = (): void => {
-		// This is intentionally empty as we're using generate() for drawing
-		// Original comment: //generate();
-	}
-
 	const generate = (): void => {
 		p.randomSeed(seed)
 		p.background(0)
