@@ -71,12 +71,12 @@ const sketch = (p: p5) => {
 		const initialSize = p.max(p.width, p.height) * 1.5
 		rects.push(p.createVector(-initialSize, -initialSize, initialSize * 2))
 
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < 50; i++) {
 			const ind = p.floor(p.random(rects.length))
 			const r = rects[ind]
 			const ms = r.z * 0.5
-			// Scale minimum size with canvas size
-			if (ms < p.max(p.width, p.height) * 0.1) continue
+			// Increased minimum size threshold
+			if (ms < p.max(p.width, p.height) * 0.15) continue
 
 			rects.push(p.createVector(r.x, r.y, ms))
 			rects.push(p.createVector(r.x + ms, r.y, ms))
@@ -94,18 +94,18 @@ const sketch = (p: p5) => {
 
 			const rnd = p.floor(p.random(1))
 			if (rnd === 0) {
-				const sub = p.floor(p.random(3, 13))
+				const sub = p.floor(p.random(2, 8))
 				const sss = r.z / sub
 
 				for (let j = 0; j < sub; j++) {
-					// Create 2-4 buildings per subdivision
-					const numBuildings = p.floor(p.random(2, 5))
+					// Create 1-3 buildings per subdivision
+					const numBuildings = p.floor(p.random(1, 3))
 					const spacing = sss / numBuildings
 
 					for (let b = 0; b < numBuildings; b++) {
-						const hh = sss * p.random(1.0, 4.0) // Height
-						const width = spacing * p.random(0.3, 0.8) // Width relative to spacing
-						const depth = sss * p.random(0.2, 0.8) // Depth of building
+						const hh = sss * p.random(1.5, 3.0)
+						const width = spacing * p.random(0.5, 0.8)
+						const depth = sss * p.random(0.4, 0.7)
 						const col = getRandomColor(p, colors)
 						const hor = p.random(1) < 0.5
 						const isCylinder = p.random(1) < 0.2 // 20% chance for cylinder
