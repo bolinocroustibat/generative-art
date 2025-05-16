@@ -22,6 +22,11 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
+	p.draw = (): void => {
+		// if (frameCount % 60 == 0) generate();
+		// generate();
+	}
+
 	const generate = (): void => {
 		p.background(0)
 		p.randomSeed(seed)

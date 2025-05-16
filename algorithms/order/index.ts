@@ -21,7 +21,11 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
-	// Set up keyboard controls for interaction
+	p.draw = () => {
+		// Empty draw function as in original
+	}
+
+	// Set up keyboard controls with our custom generate function
 	p.keyPressed = setupKeyboardControls(p, {
 		generateFn: () => {
 			seed = p.floor(p.random(999999))
@@ -31,111 +35,104 @@ const sketch = (p: p5) => {
 	})
 
 	const generate = () => {
-		// Set up the scene
 		p.background(getRandomColor(p, colors))
 		p.randomSeed(seed)
 
-		// Configure lighting for 3D rendering
+		// Setup lights and camera
 		p.ambientLight(240, 240, 240)
-		p.directionalLight(20, 20, 20, 0, 1, 0)  // Top light
-		p.directionalLight(10, 10, 20, -1, 0, 0) // Side light
+		p.directionalLight(20, 20, 20, 0, 1, 0)
+		p.directionalLight(10, 10, 20, -1, 0, 0)
 		p.noStroke()
 
-		// Set up orthographic camera projection for isometric-style view
+		// Set up orthographic projection with explicit parameters to control the view
 		const zoom = 1.2
 		p.ortho(
-			(-p.width / 2) * zoom,    // left
-			(p.width / 2) * zoom,     // right
-			(-p.height / 2) * zoom,   // bottom
-			(p.height / 2) * zoom,    // top
-			0,                        // near clipping plane
-			p.max(p.width, p.height) * 4  // far clipping plane
+			(-p.width / 2) * zoom, // left
+			(p.width / 2) * zoom, // right
+			(-p.height / 2) * zoom, // bottom
+			(p.height / 2) * zoom, // top
+			0, // near
+			p.max(p.width, p.height) * 4, // far
 		)
 
-		// Position and orient the camera
+		// Scale camera distance with canvas size
 		const cameraDistance = p.max(p.width, p.height) * 1.5
+
+		// Move the camera up to compensate for WEBGL's Y-axis direction
 		p.translate(0, -p.height * 0.25, -cameraDistance)
-		
-		// Rotate the scene for isometric perspective
+
+		// Rotate to match Processing's view, but adjust for WEBGL's Y-axis
 		p.rotateX(p.HALF_PI - p.atan(1 / p.sqrt(2)))
 		p.rotateZ(-p.HALF_PI * p.random(0.5))
 
-		// Initialize rectangle subdivision system
+		// Generate rectangles - adjust for WEBGL's centered origin
 		const rects: p5.Vector[] = []
+		// Scale initial rectangle size with canvas size
 		const initialSize = p.max(p.width, p.height) * 1.5
-		// Initial rectangle: x, y position and size (z)
 		rects.push(p.createVector(-initialSize, -initialSize, initialSize * 2))
 
-		// Recursive subdivision of rectangles
 		for (let i = 0; i < 100; i++) {
 			const ind = p.floor(p.random(rects.length))
 			const r = rects[ind]
-			const ms = r.z * 0.5  // New subdivision size
-
-			// Stop subdividing if rectangles become too small
+			const ms = r.z * 0.5
+			// Scale minimum size with canvas size
 			if (ms < p.max(p.width, p.height) * 0.1) continue
 
-			// Create four new smaller rectangles
-			rects.push(p.createVector(r.x, r.y, ms))           // Top-left
-			rects.push(p.createVector(r.x + ms, r.y, ms))      // Top-right
-			rects.push(p.createVector(r.x + ms, r.y + ms, ms)) // Bottom-right
-			rects.push(p.createVector(r.x, r.y + ms, ms))      // Bottom-left
-			rects.splice(ind, 1)  // Remove the subdivided rectangle
+			rects.push(p.createVector(r.x, r.y, ms))
+			rects.push(p.createVector(r.x + ms, r.y, ms))
+			rects.push(p.createVector(r.x + ms, r.y + ms, ms))
+			rects.push(p.createVector(r.x, r.y + ms, ms))
+			rects.splice(ind, 1)
 		}
 
-		// Draw the generated rectangles with 3D elements
+		// Draw rectangles
 		for (let i = 0; i < rects.length; i++) {
 			const r = rects[i]
 
 			p.push()
 			p.translate(r.x, r.y)
 
-			// Randomly decide whether to add 3D elements
 			const rnd = p.floor(p.random(1))
 			if (rnd === 0) {
-				// Create a series of bars within each rectangle
-				const sub = p.floor(p.random(3, 13))  // Number of subdivisions
-				const sss = r.z / sub                 // Size of each subdivision
-				const hh = sss * p.random(0.1, 2.5)   // Height of bars
-				const dd = sss * p.random(0.1, 0.8)   // Depth of bars
-				const hor = p.random(1) < 0.5         // Horizontal or vertical orientation
+				const sub = p.floor(p.random(3, 13))
+				const sss = r.z / sub
+				const hh = sss * p.random(0.1, 2.5)
+				const dd = sss * p.random(0.1, 0.8)
+				const hor = p.random(1) < 0.5
 
-				// Generate bars with varying heights and colors
 				for (let j = 0; j < sub; j++) {
 					const col = getRandomColor(p, colors)
 					p.push()
 
 					if (hor) {
-						// Draw horizontal bars
 						p.push()
 						const hhh = hh * p.random(1)
 						p.translate((j + 0.5) * sss, r.z * 0.5, hhh * 0.5)
 						p.noStroke()
 						p.fill(col)
-						p.box(dd, r.z, hhh)  // Solid bar
+						p.box(dd, r.z, hhh)
 						p.pop()
 
 						p.push()
 						p.translate((j + 0.5) * sss, r.z * 0.5, hh * 0.5)
 						p.stroke(col)
 						p.noFill()
-						p.box(dd, r.z, hh)   // Wireframe bar
+						p.box(dd, r.z, hh)
 						p.pop()
 					} else {
-						// Draw vertical bars
 						const hhh = hh * p.random(1)
 						p.push()
 						p.translate(r.z * 0.5, (j + 0.5) * sss, hhh * 0.5)
 						p.noStroke()
 						p.fill(col)
-						p.box(r.z, dd, hhh)  // Solid bar
+						p.box(r.z, dd, hhh)
 						p.pop()
 
 						p.push()
 						p.translate(r.z * 0.5, (j + 0.5) * sss, hh * 0.5)
 						p.stroke(col)
 						p.noFill()
-						p.box(r.z, dd, hh)   // Wireframe bar
+						p.box(r.z, dd, hh)
 						p.pop()
 					}
 
@@ -147,5 +144,5 @@ const sketch = (p: p5) => {
 	}
 }
 
-// Initialize the p5.js sketch
+// Create a new p5 instance with the sketch
 new p5(sketch)

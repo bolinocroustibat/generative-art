@@ -20,6 +20,11 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
+	p.draw = (): void => {
+		// This is intentionally empty as we're using generate() for drawing
+		// and only calling redraw() to trigger it
+	}
+
 	const generate = (): void => {
 		p.background(0, 255, 255)
 		p.randomSeed(seed)

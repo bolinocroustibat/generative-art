@@ -23,6 +23,10 @@ const sketch = (p: p5) => {
 		generate()
 	}
 
+	p.draw = () => {
+		// if (p.frameCount % 40 === 0) generate()
+	}
+
 	// Set up keyboard controls with our custom generate function
 	p.keyPressed = setupKeyboardControls(p, {
 		generateFn: () => {
