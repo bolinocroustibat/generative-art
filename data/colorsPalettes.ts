@@ -184,47 +184,73 @@ export const colorPalettes: { [key: string]: string[] } = {
 
 	// Wes Anderson Palettes
 	bottleRocket: [
-		"#A42820", "#5F5647", "#9B110E", "#3F5151", "#4E2A1E", "#550307",
-		"#0C1707", "#FAD510", "#CB2314", "#273046", "#354823", "#1E1E1E"
+		"#A42820",
+		"#5F5647",
+		"#9B110E",
+		"#3F5151",
+		"#4E2A1E",
+		"#550307",
+		"#0C1707",
+		"#FAD510",
+		"#CB2314",
+		"#273046",
+		"#354823",
+		"#1E1E1E",
 	],
 
-	rushmore: [
-		"#E1BD6D", "#EABE94", "#0B775E", "#35274A", "#F2300F"
-	],
+	rushmore: ["#E1BD6D", "#EABE94", "#0B775E", "#35274A", "#F2300F"],
 
 	royal: [
-		"#899DA4", "#C93312", "#FAEFD1", "#DC863B", "#9A8822",
-		"#F5CDB4", "#F8AFA8", "#FDDDA0", "#74A089"
+		"#899DA4",
+		"#C93312",
+		"#FAEFD1",
+		"#DC863B",
+		"#9A8822",
+		"#F5CDB4",
+		"#F8AFA8",
+		"#FDDDA0",
+		"#74A089",
 	],
 
-	zissou: [
-		"#3B9AB2", "#78B7C5", "#EBCC2A", "#E1AF00" , "#F21A00"
-	],
+	zissou: ["#3B9AB2", "#78B7C5", "#EBCC2A", "#E1AF00", "#F21A00"],
 
 	darjeelingLimited: [
-		"#FF0000", "#00A08A", "#F2AD00", "#F98400", "#5BBCD6",
-		"#ECCBAE", "#046C9A", "#D69C4E", "#ABDDDE", "#000000"
+		"#FF0000",
+		"#00A08A",
+		"#F2AD00",
+		"#F98400",
+		"#5BBCD6",
+		"#ECCBAE",
+		"#046C9A",
+		"#D69C4E",
+		"#ABDDDE",
+		"#000000",
 	],
 
-	chevalier: [
-		"#446455", "#FDD262", "#D3DDDC", "#C7B19C"
-	],
+	chevalier: ["#446455", "#FDD262", "#D3DDDC", "#C7B19C"],
 
-	fantasticFox: [
-		"#DD8D29", "#E2D200", "#46ACC8", "#E58601", "#B40F20"
-	],
+	fantasticFox: ["#DD8D29", "#E2D200", "#46ACC8", "#E58601", "#B40F20"],
 
-	cavalcanti: [
-		"#D8B70A", "#02401B", "#A2A475", "#81A88D", "#972D15"
-	],
+	cavalcanti: ["#D8B70A", "#02401B", "#A2A475", "#81A88D", "#972D15"],
 
 	grandBudapestHotel: [
-		"#F1BB7B", "#FD6467", "#5B1A18", "#D67236", "#E6A0C4",
-		"#C6CDF7", "#D8A499", "#7294D4"
+		"#F1BB7B",
+		"#FD6467",
+		"#5B1A18",
+		"#D67236",
+		"#E6A0C4",
+		"#C6CDF7",
+		"#D8A499",
+		"#7294D4",
 	],
 
 	isleOfDogs: [
-		"#9986A5", "#79402E", "#CCBA72", "#0F0D0E", "#D9D0D3", "#8D8680"
+		"#9986A5",
+		"#79402E",
+		"#CCBA72",
+		"#0F0D0E",
+		"#D9D0D3",
+		"#8D8680",
 	],
 
 	caretonga: [
@@ -234,20 +260,9 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#EAEAEA", // Light gray (duplicate in original)
 	],
 
-	cables: [
-		"#1E1E1E",
-		"#5A5A5A",
-		"#FFFFFF",
-	],
+	cables: ["#1E1E1E", "#5A5A5A", "#FFFFFF"],
 
-	arcos: [
-		"#FF0000",
-		"#00FF00",
-		"#0000FF",
-		"#FFFF00",
-		"#FF00FF",
-		"#00FFFF",
-	],
+	arcos: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"],
 
 	childrenOfMen: [
 		"#223327",
@@ -259,13 +274,10 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#6a8974",
 		"#2d3c2f",
 		"#998462",
-		"#61736a"
+		"#61736a",
 	],
 
-	arboles: [
-		"#4B9EFF",
-		"#000000",
-	],
+	arboles: ["#4B9EFF", "#000000"],
 
 	helados: [
 		"#FFB7B7", // -13774701
@@ -276,19 +288,9 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FFEEA1", // -94591
 	],
 
-	circulos: [
-		"#F73F09",
-		"#004D51",
-		"#008280",
-		"#00B9B5",
-	],
+	circulos: ["#F73F09", "#004D51", "#008280", "#00B9B5"],
 
-	circulos2: [
-		"#F73F09",
-		"#004D51",
-		"#008280",
-		"#00B9B5",
-	],
+	circulos2: ["#F73F09", "#004D51", "#008280", "#00B9B5"],
 
 	circulosdentrocirculos2: [
 		"#163440",
@@ -298,17 +300,44 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FFFACC",
 	],
 
-	triangleOfSadness: [
-		"#d4bba3",  // sunlit skin/beige tones
-		"#c1a68f",  // sandy wood deck hues
-		"#7a6a5e",  // weathered wood/ship details
-		"#4a4e56",  // yacht metal shadows
-		"#6b7fa2",  // sky and sea midtones
-		"#a2bacd",  // water highlights
-		"#e3dfd8",  // bright fabric/linen
-		"#ac9f90",  // soft upholstery tones
-		"#8f867d",  // driftwood/beach rock
-		"#b28c76"   // warm earthy accents (e.g., shore debris)
-	]
+	enredaderas: [
+		"#FE4D9F",
+		"#EE1C25",
+		"#2F3293",
+		"#3CB74C",
+		"#0272BE",
+		"#BDCBD5",
+		"#FEFEFE",
+	],
 
+	montains: ["#DB3B4B", "#EDD23B", "#D4DBDD", "#2172BA"],
+
+	spiral: ["#EA554F", "#FAC745", "#2760AB", "#369952", "#1E2326", "#FFF7F3"],
+
+	forms: [
+		"#F46324",
+		"#0111A3",
+		"#FFD65E",
+		"#00C191",
+		"#8BD7D2",
+		"#538BFC",
+		"#F2E1E1",
+		"#C96FDB",
+		"#964CAA",
+		"#EDAC34",
+		"#FF66A5",
+	],
+
+	triangleOfSadness: [
+		"#d4bba3", // sunlit skin/beige tones
+		"#c1a68f", // sandy wood deck hues
+		"#7a6a5e", // weathered wood/ship details
+		"#4a4e56", // yacht metal shadows
+		"#6b7fa2", // sky and sea midtones
+		"#a2bacd", // water highlights
+		"#e3dfd8", // bright fabric/linen
+		"#ac9f90", // soft upholstery tones
+		"#8f867d", // driftwood/beach rock
+		"#b28c76", // warm earthy accents (e.g., shore debris)
+	],
 }
