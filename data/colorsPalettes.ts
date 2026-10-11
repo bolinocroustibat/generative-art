@@ -314,6 +314,21 @@ export const colorPalettes: { [key: string]: string[] } = {
 
 	spiral: ["#EA554F", "#FAC745", "#2760AB", "#369952", "#1E2326", "#FFF7F3"],
 
+	candy: ["#434E20", "#E8AF36", "#F56546", "#446E9A", "#F6EDDD"],
+
+	rayos: ["#FFFFFF", "#559BF7", "#173A7B", "#FF3A3D", "#FFB302"],
+
+	cybergrids: [
+		"#000000",
+		"#FFFFFF",
+		"#FF7700",
+		"#000000",
+		"#15FF4A",
+		"#000000",
+		"#000000",
+		"#BBBBFF",
+	],
+
 	forms: [
 		"#F46324",
 		"#0111A3",
