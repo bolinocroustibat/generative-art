@@ -117,7 +117,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "eyes001/spiral",
+		algorithmName: "eyes/spiral",
 	})
 }
 

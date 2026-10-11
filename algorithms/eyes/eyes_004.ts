@@ -145,7 +145,7 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			generate()
 		},
-		algorithmName: "eyes004",
+		algorithmName: "eyes/eyes_004",
 	})
 }
 
