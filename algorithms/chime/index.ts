@@ -3,7 +3,7 @@ import {
 	getCanvasDimensions,
 	getColorPalette,
 	setupKeyboardControls,
-} from "../../helpers/index.ts"
+} from "../../helpers"
 
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
