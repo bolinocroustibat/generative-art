@@ -95,7 +95,7 @@ const sketch = (p: p5) => {
 	p.setup = async () => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
-		p.smooth(8)
+		p.smooth()
 		cubitos = []
 		generar(0, 0, p.width, p.height, 5)
 	}

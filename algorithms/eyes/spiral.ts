@@ -75,7 +75,7 @@ const sketch = (p: p5) => {
 				if(i === 0) {
 					p.vertex(0, 0)
 				} else {
-					p.curveVertex(px, py)
+					p.splineVertex(px, py)
 				}
 			}
 			p.endShape()
@@ -93,7 +93,7 @@ const sketch = (p: p5) => {
 				const radius = s * (1 - t) * 0.8
 				const px = p.cos(angle) * radius
 				const py = p.sin(angle) * radius
-				p.curveVertex(px, py)
+				p.splineVertex(px, py)
 			}
 			p.endShape()
 		}

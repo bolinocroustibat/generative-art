@@ -1,21 +1,23 @@
 {
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
 	"javascript": {
 		"formatter": {
 			"semicolons": "asNeeded"
 		}
 	},
 	"files": {
-		"ignore": [
-			".venv/**/*",
-			".vscode/**/*",
-			".cursor/**/*",
-			"node_modules/**/*",
-			"dist/**/*",
-			"build/**/*",
-			".git/**/*",
-			"extract-dominant-colors/**/*",
-			"extract-still-image/**/*",
-			"images-average-gan/**/*"
+		"includes": [
+			"**",
+			"!.venv",
+			"!.vscode",
+			"!.cursor",
+			"!node_modules",
+			"!dist",
+			"!build",
+			"!.git",
+			"!extract-dominant-colors",
+			"!extract-still-image",
+			"!images-average-gan"
 		]
 	}
 }

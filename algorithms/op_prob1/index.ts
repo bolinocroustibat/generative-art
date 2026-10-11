@@ -8,12 +8,13 @@ import {
 // Create a p5.js sketch in instance mode
 const sketch = (p: p5) => {
 	let seed: number
-	const colors: string[] = getColorPalette()
+	let colors: string[]
 
-	p.setup = (): void => {
+	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
 		p.pixelDensity(2)
+		colors = await getColorPalette()
 		seed = p.floor(p.random(999999)) // Initialize seed
 		generate()
 	}

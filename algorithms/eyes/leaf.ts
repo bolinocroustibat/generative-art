@@ -61,16 +61,12 @@ const sketch = (p: p5) => {
 		p.fill(color)
 		p.beginShape()
 		p.vertex(0, -s)  // Tip
-		p.bezierVertex(
-			-leafWidth, -s * 0.7,  // control point 1
-			-leafWidth, s * 0.3,   // control point 2
-			0, s                   // bottom point
-		)
-		p.bezierVertex(
-			leafWidth, s * 0.3,    // control point 3
-			leafWidth, -s * 0.7,   // control point 4
-			0, -s                  // back to tip
-		)
+		p.bezierVertex(-leafWidth, -s * 0.7)
+		p.bezierVertex(-leafWidth, s * 0.3)
+		p.bezierVertex(0, s)
+		p.bezierVertex(leafWidth, s * 0.3)
+		p.bezierVertex(leafWidth, -s * 0.7)
+		p.bezierVertex(0, -s)
 		p.endShape()
 
 		// Vein pattern

@@ -15,7 +15,7 @@ const sketch = (p: p5) => {
 	p.setup = async () => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.P2D)
-		p.smooth(8)
+		p.smooth()
 		p.pixelDensity(2)
 		colors = await getColorPalette()
 		// Select two distinct colors from the palette

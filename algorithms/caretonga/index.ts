@@ -14,11 +14,17 @@ const sketch = (p: p5) => {
 	p.setup = async () => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height)
-		p.smooth(4)
+		p.smooth()
 		p.pixelDensity(2)
 		colors = await getColorPalette()
 		seed = p.floor(p.random(999999))
 		generate()
+	}
+
+	const colorWithAlpha = (alpha: number): p5.Color => {
+		const color = getRandomColor(p, colors)
+		color.setAlpha(alpha)
+		return color
 	}
 
 	const generate = () => {
@@ -27,7 +33,7 @@ const sketch = (p: p5) => {
 		p.background(getRandomColor(p, colors))
 		p.noStroke()
 
-		p.fill(getRandomColor(p, colors), 1)
+		p.fill(colorWithAlpha(1))
 		for (let i = 0; i < 200000; i++) {
 			const x = p.random(p.width)
 			const y = p.random(p.height)
@@ -35,7 +41,7 @@ const sketch = (p: p5) => {
 			p.ellipse(x, y, tam, tam)
 		}
 
-		p.fill(getRandomColor(p, colors), 20)
+		p.fill(colorWithAlpha(20))
 		p.rect(0, 0, p.width, p.height)
 
 		const bordes = 20
@@ -48,9 +54,9 @@ const sketch = (p: p5) => {
 			const y = bordes + i * des
 			const w = p.width - (bordes + (cant - i) * des) * 2
 			const h = p.height - (bordes + i * des) * 2
-			p.stroke(getRandomColor(p, colors), 40)
+			p.stroke(colorWithAlpha(40))
 			p.rect(x - 1, y - 1, w, h)
-			p.stroke(getRandomColor(p, colors), 240)
+			p.stroke(colorWithAlpha(240))
 			p.rect(x, y, w, h)
 		}
 
@@ -65,7 +71,7 @@ const sketch = (p: p5) => {
 			for (let ii = 0; ii < cw; ii++) {
 				p.strokeWeight(0.5)
 				p.noFill()
-				p.stroke(getRandomColor(p, colors), 40)
+				p.stroke(colorWithAlpha(40))
 				const x = p.width/2 + dim * (ii - cw/2 + 0.5)
 				const y = p.height/2 + dim * (jj - ch/2 + 0.5)
 
@@ -90,8 +96,8 @@ const sketch = (p: p5) => {
 						const yy = y + (i + j) * tam/2 + dd
 						for (let k = 0; k < 4; k++) {
 							const cc = p.floor(p.random(4))
-							p.fill(getRandomColor(p, colors), 200)
-							p.stroke(getRandomColor(p, colors), 200)
+							p.fill(colorWithAlpha(200))
+							p.stroke(colorWithAlpha(200))
 							figura(xx, yy, tam, 0)
 						}
 					}
@@ -104,7 +110,7 @@ const sketch = (p: p5) => {
 			const x = p.random(p.width)
 			const y = p.random(p.height)
 			const tam = p.map(y, 0, p.height, 1, 3)
-			p.fill(getRandomColor(p, colors), p.random(1, 20))
+			p.fill(colorWithAlpha(p.random(1, 20)))
 			p.ellipse(x, y, tam, tam)
 		}
 	}

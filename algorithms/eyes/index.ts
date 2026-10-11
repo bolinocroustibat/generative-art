@@ -55,11 +55,19 @@ const sketch = (p: p5) => {
 
 			p.beginShape()
 			p.vertex(x - s * 1.1, y) // first point
-			p.bezierVertex(x - s * 1.1, y - my, x - mx, y - s * 0.6, x, y - s * 0.6)
-			p.bezierVertex(x + mx, y - s * 0.6, x + s * 1.1, y - my, x + s * 1.1, y)
+			p.bezierVertex(x - s * 1.1, y - my)
+			p.bezierVertex(x - mx, y - s * 0.6)
+			p.bezierVertex(x, y - s * 0.6)
+			p.bezierVertex(x + mx, y - s * 0.6)
+			p.bezierVertex(x + s * 1.1, y - my)
+			p.bezierVertex(x + s * 1.1, y)
 			p.vertex(x + s * 1.1, y) // first point
-			p.bezierVertex(x + s * 1.1, y + my, x + mx, y + s * 0.6, x, y + s * 0.6)
-			p.bezierVertex(x - mx, y + s * 0.6, x - s * 1.1, y + my, x - s * 1.1, y)
+			p.bezierVertex(x + s * 1.1, y + my)
+			p.bezierVertex(x + mx, y + s * 0.6)
+			p.bezierVertex(x, y + s * 0.6)
+			p.bezierVertex(x - mx, y + s * 0.6)
+			p.bezierVertex(x - s * 1.1, y + my)
+			p.bezierVertex(x - s * 1.1, y)
 			p.endShape(p.CLOSE)
 			p.pop()
 		}
@@ -76,11 +84,19 @@ const sketch = (p: p5) => {
 
 		p.beginShape()
 		p.vertex(x - s * 1.1, y) // first point
-		p.bezierVertex(x - s * 1.1, y - my, x - mx, y - s * 0.6, x, y - s * 0.6)
-		p.bezierVertex(x + mx, y - s * 0.6, x + s * 1.1, y - my, x + s * 1.1, y)
+		p.bezierVertex(x - s * 1.1, y - my)
+		p.bezierVertex(x - mx, y - s * 0.6)
+		p.bezierVertex(x, y - s * 0.6)
+		p.bezierVertex(x + mx, y - s * 0.6)
+		p.bezierVertex(x + s * 1.1, y - my)
+		p.bezierVertex(x + s * 1.1, y)
 		p.vertex(x + s * 1.1, y) // first point
-		p.bezierVertex(x + s * 1.1, y + my, x + mx, y + s * 0.6, x, y + s * 0.6)
-		p.bezierVertex(x - mx, y + s * 0.6, x - s * 1.1, y + my, x - s * 1.1, y)
+		p.bezierVertex(x + s * 1.1, y + my)
+		p.bezierVertex(x + mx, y + s * 0.6)
+		p.bezierVertex(x, y + s * 0.6)
+		p.bezierVertex(x - mx, y + s * 0.6)
+		p.bezierVertex(x - s * 1.1, y + my)
+		p.bezierVertex(x - s * 1.1, y)
 		p.endShape(p.CLOSE)
 
 		p.fill(rcol())

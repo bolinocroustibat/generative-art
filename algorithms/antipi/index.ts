@@ -15,7 +15,7 @@ const sketch = (p: p5) => {
 	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
 		p.createCanvas(dimensions.width, dimensions.height, p.WEBGL)
-		p.smooth(16)
+		p.smooth()
 		p.pixelDensity(2)
 		colors = await getColorPalette()
 		seed = p.floor(p.random(999999)) // Initialize seed

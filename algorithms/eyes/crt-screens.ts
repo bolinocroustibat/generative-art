@@ -62,13 +62,21 @@ const sketch = (p: p5) => {
 		p.beginShape()
 		// Top
 		p.vertex(x - s * 0.9, y - s * 0.7)
-		p.bezierVertex(x - s * 0.9, y - s * 0.9, x - s * 0.7, y - s * 0.9, x, y - s * 0.9)
-		p.bezierVertex(x + s * 0.7, y - s * 0.9, x + s * 0.9, y - s * 0.9, x + s * 0.9, y - s * 0.7)
+		p.bezierVertex(x - s * 0.9, y - s * 0.9)
+		p.bezierVertex(x - s * 0.7, y - s * 0.9)
+		p.bezierVertex(x, y - s * 0.9)
+		p.bezierVertex(x + s * 0.7, y - s * 0.9)
+		p.bezierVertex(x + s * 0.9, y - s * 0.9)
+		p.bezierVertex(x + s * 0.9, y - s * 0.7)
 		// Right
 		p.vertex(x + s * 0.9, y + s * 0.7)
-		p.bezierVertex(x + s * 0.9, y + s * 0.9, x + s * 0.7, y + s * 0.9, x, y + s * 0.9)
+		p.bezierVertex(x + s * 0.9, y + s * 0.9)
+		p.bezierVertex(x + s * 0.7, y + s * 0.9)
+		p.bezierVertex(x, y + s * 0.9)
 		// Bottom
-		p.bezierVertex(x - s * 0.7, y + s * 0.9, x - s * 0.9, y + s * 0.9, x - s * 0.9, y + s * 0.7)
+		p.bezierVertex(x - s * 0.7, y + s * 0.9)
+		p.bezierVertex(x - s * 0.9, y + s * 0.9)
+		p.bezierVertex(x - s * 0.9, y + s * 0.7)
 		p.endShape(p.CLOSE)
 	}
 
