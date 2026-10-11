@@ -5,6 +5,14 @@ import {
 	setupKeyboardControls,
 } from "../../helpers/index.ts"
 
+type Drop = {
+	x: number
+	y: number
+	vx: number
+	vy: number
+	sprite: p5.Graphics
+}
+
 type Burst = {
 	angle: number
 	distance: number
@@ -12,12 +20,12 @@ type Burst = {
 	sprite: p5.Graphics
 }
 
-// Moving version of gotas: the same drops, with bursts orbiting and spinning
+// Moving version of gotas: the drops drift, and the bursts orbit and spin
 const sketch = (p: p5) => {
 	let seed: number
 	let colors: string[] = []
 	let ready = false
-	let base: p5.Graphics | null = null
+	let drops: Drop[] = []
 	let bursts: Burst[] = []
 
 	p.setup = async (): Promise<void> => {
@@ -34,23 +42,26 @@ const sketch = (p: p5) => {
 	const build = (): void => {
 		ready = false
 		p.randomSeed(seed)
-		if (base) base.remove()
+		for (const drop of drops) drop.sprite.remove()
 		for (const burst of bursts) burst.sprite.remove()
 
 		const unit = p.min(p.width, p.height)
-		base = p.createGraphics(p.width, p.height)
-		base.pixelDensity(1)
-		base.background(0)
-
+		const nextDrops: Drop[] = []
 		for (let i = 0; i < 100; i++) {
 			const x = p.random(p.width)
 			const y = p.random(p.height)
 			const s = unit * p.random(0.4)
-			base.stroke(0)
-			base.fill(rcol())
-			base.ellipse(x, y, s, s)
-			arc2(base, x, y, s, s * 1.8, 0, p.TWO_PI, rcol(), 80, 0)
+			const heading = i * 2.399963
+			const speed = 18 + (i % 5) * 10
+			nextDrops.push({
+				x,
+				y,
+				vx: p.cos(heading) * speed,
+				vy: p.sin(heading) * speed,
+				sprite: bakeDrop(s, rcol(), rcol()),
+			})
 		}
+		drops = nextDrops
 
 		const next: Burst[] = []
 		const sub = p.int(p.random(1, 3))
@@ -73,6 +84,20 @@ const sketch = (p: p5) => {
 
 		bursts = next
 		ready = true
+	}
+
+	const bakeDrop = (s: number, fill: p5.Color, glow: p5.Color): p5.Graphics => {
+		const radius = s * 0.9 + 2
+		const side = Math.max(2, Math.ceil(radius * 2))
+		const sprite = p.createGraphics(side, side)
+		sprite.pixelDensity(1)
+		sprite.clear()
+		const center = side / 2
+		sprite.stroke(0)
+		sprite.fill(fill)
+		sprite.ellipse(center, center, s, s)
+		arc2(sprite, center, center, s, s * 1.8, 0, p.TWO_PI, glow, 80, 0)
+		return sprite
 	}
 
 	const bakeCircle = (s: number): p5.Graphics => {
@@ -190,12 +215,25 @@ const sketch = (p: p5) => {
 		return p.color(colors[p.floor(p.random(colors.length))])
 	}
 
+	const wrap = (value: number, limit: number, size: number): number => {
+		const span = limit + size
+		const shifted = value + size / 2
+		const wrapped = ((shifted % span) + span) % span
+		return wrapped - size / 2
+	}
+
 	p.draw = (): void => {
-		if (!ready || !base) return
+		if (!ready) return
 		const time = p.millis() / 1000
-		p.imageMode(p.CORNER)
-		p.image(base, 0, 0)
+		p.background(0)
 		p.imageMode(p.CENTER)
+		for (const drop of drops) {
+			p.image(
+				drop.sprite,
+				wrap(drop.x + drop.vx * time, p.width, drop.sprite.width),
+				wrap(drop.y + drop.vy * time, p.height, drop.sprite.height),
+			)
+		}
 		for (const burst of bursts) {
 			const ang = burst.angle + time * 0.12
 			const x = p.width * 0.5 + p.cos(ang) * burst.distance
