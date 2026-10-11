@@ -249,6 +249,19 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#00FFFF",
 	],
 
+	childrenOfMen: [
+		"#223327",
+		"#506858",
+		"#979e82",
+		"#3b5442",
+		"#171c14",
+		"#ccb773",
+		"#6a8974",
+		"#2d3c2f",
+		"#998462",
+		"#61736a"
+	],
+
 	arboles: [
 		"#4B9EFF",
 		"#000000",
@@ -284,4 +297,18 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#CAFAC3",
 		"#FFFACC",
 	],
+
+	triangleOfSadness: [
+		"#d4bba3",  // sunlit skin/beige tones
+		"#c1a68f",  // sandy wood deck hues
+		"#7a6a5e",  // weathered wood/ship details
+		"#4a4e56",  // yacht metal shadows
+		"#6b7fa2",  // sky and sea midtones
+		"#a2bacd",  // water highlights
+		"#e3dfd8",  // bright fabric/linen
+		"#ac9f90",  // soft upholstery tones
+		"#8f867d",  // driftwood/beach rock
+		"#b28c76"   // warm earthy accents (e.g., shore debris)
+	]
+
 }
