@@ -14,4 +14,4 @@ export const CURRENT_ALGORITHM = "order/order4"
 export const COLOR_PALETTE = "memphis"
 
 export const MOVIES_PALETTES_API_URL =
-	"https://movies-palettes.adriencarpentier.com/api"
+	"https://cinematheque.adriencarpentier.com/api"

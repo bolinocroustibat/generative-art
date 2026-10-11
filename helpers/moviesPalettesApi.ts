@@ -25,7 +25,7 @@ interface MoviePaletteResponse {
 export const getMoviePalette = async (movieSlug: string): Promise<string[]> => {
 	try {
 		const response = await fetch(
-			`${MOVIES_PALETTES_API_URL}/palettes/${movieSlug}`,
+			`${MOVIES_PALETTES_API_URL}/movies/palettes/${movieSlug}`,
 		)
 
 		if (!response.ok) {
