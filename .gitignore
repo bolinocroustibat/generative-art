@@ -69,3 +69,4 @@ dmypy.json
 # Project specific
 data/pictures
 data/videos
+processing/
