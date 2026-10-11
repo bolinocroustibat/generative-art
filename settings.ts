@@ -1,7 +1,7 @@
 // Canvas dimensions
 // Instagram Stories: 9:16 aspect ratio, 1080x1920 resolution
-export const CANVAS_WIDTH = 4489
-export const CANVAS_HEIGHT = 3130
+export const CANVAS_WIDTH = 1500
+export const CANVAS_HEIGHT = 960
 
 // Current algorithm to display
 // Change this value to switch between algorithms
