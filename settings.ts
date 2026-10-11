@@ -1,13 +1,13 @@
 // Canvas dimensions
 // Instagram Stories: 9:16 aspect ratio, 1080x1920 resolution
-export const CANVAS_WIDTH = 960
-export const CANVAS_HEIGHT = 960
+export const CANVAS_WIDTH = 4489
+export const CANVAS_HEIGHT = 3130
 
 // Current algorithm to display
 // Change this value to switch between algorithms
 // Format: "algorithm" or "algorithm/file"
 // Examples: "paper" (uses paper/index.ts) or "paper/paper2" (uses paper/paper2.ts)
-export const CURRENT_ALGORITHM = "order/order4"
+export const CURRENT_ALGORITHM = "order/order3Motion"
 
 // Color palette to use
 // This is completely independent from the algorithm
