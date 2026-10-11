@@ -2,7 +2,6 @@ import p5 from "p5"
 import {
 	getCanvasDimensions,
 	getColorPalette,
-	getRandomColor,
 	setupKeyboardControls,
 } from "../../helpers"
 
@@ -27,12 +26,18 @@ const sketch = (p: p5) => {
 		const incremento = tam_max / cant
 		const x = p.width/2
 		const y = p.height/2
-		const col = p.color(p.random(255), p.random(255), p.random(255))
+		
+		// Select a base color from the palette
+		const baseColorIndex = p.floor(p.random(colors.length))
+		const col = p.color(colors[baseColorIndex])
 
 		for (let i = 0; i < cant; i++) {
 			const tam = tam_max - (incremento * i)
 			const cc = 2 * p.floor(p.random(1, 10))
-			const c = desplazar(col, 1/p.floor(p.random(2, 5)))
+			// Alternate between shifting hue and using different palette colors
+			const c = i % 2 === 0 
+				? desplazar(col, 1/p.floor(p.random(2, 5)))
+				: p.color(colors[(baseColorIndex + i) % colors.length])
 			circulo(x, y, tam, tam, cc, c)
 		}
 	}
@@ -76,4 +81,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)
