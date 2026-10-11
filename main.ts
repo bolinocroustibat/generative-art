@@ -9,8 +9,7 @@ const algorithmPath = CURRENT_ALGORITHM.includes("/")
 	: `./algorithms/${CURRENT_ALGORITHM}/index.ts`
 
 // Dynamically import the selected algorithm
-/* @vite-ignore */
-import(algorithmPath)
+import(/* @vite-ignore */ algorithmPath)
 	.then(() => {
 		console.log(`Algorithm "${CURRENT_ALGORITHM}" loaded successfully.`)
 	})
