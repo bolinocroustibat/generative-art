@@ -92,3 +92,8 @@ const sketch = (p: p5) => {
 
 new p5(sketch)
 ```
+
+## Processing sources and motion variants
+
+1. Original Processing sketches live in `processing/`, a local gitignored clone. Do not copy a `.pde` into `algorithms/`.
+2. One folder per piece. `index.ts` is the main port. A variant, including an animated one, is another file in that same folder (`order/order3Motion.ts`). Do not create a new top-level folder for an animation.
