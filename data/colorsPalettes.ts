@@ -343,6 +343,12 @@ export const colorPalettes: { [key: string]: string[] } = {
 		"#FF66A5",
 	],
 
+	soles: ["#FFFFFF", "#FFD354", "#E95525", "#1F63B8", "#000300"],
+
+	gotas: ["#53EDB7", "#4D00B2", "#FFAE44", "#FFF0E5", "#FF324E"],
+
+	cintas: ["#F19617", "#251207", "#15727F", "#CEAB81", "#BD3E36"],
+
 	triangleOfSadness: [
 		"#d4bba3", // sunlit skin/beige tones
 		"#c1a68f", // sandy wood deck hues
