@@ -1,23 +1,46 @@
 import type p5 from "p5"
 
-// Saves the current canvas as a PNG image with a timestamp filename
-// Note: Images will be downloaded to the browser's default download location
-export const saveImage = (p: p5, algorithmName?: string): void => {
-	const timestamp =
-		p.year() +
-		"-" +
-		p.nf(p.month(), 2) +
-		"-" +
-		p.nf(p.day(), 2) +
-		"_" +
-		p.nf(p.hour(), 2) +
-		"-" +
-		p.nf(p.minute(), 2) +
-		"-" +
-		p.nf(p.second(), 2)
+import { saveStem } from "./outputPath.ts"
 
-	// Include the algorithm name in the filename if provided
-	const filename = algorithmName ? `${algorithmName}_${timestamp}` : timestamp
+const canvasBlob = (canvas: HTMLCanvasElement): Promise<Blob> => {
+	return new Promise((resolve, reject) => {
+		canvas.toBlob((blob) => {
+			if (!blob) {
+				reject(new Error("Could not read the canvas"))
+				return
+			}
+			resolve(blob)
+		}, "image/png")
+	})
+}
 
-	p.saveCanvas(filename, "png")
+const writeImage = async (
+	sketch: p5,
+	algorithmName?: string,
+): Promise<void> => {
+	const canvas = sketch.canvas
+	if (!(canvas instanceof HTMLCanvasElement)) {
+		throw new Error("No canvas to save")
+	}
+
+	const relativePath = `${saveStem(sketch, algorithmName)}.png`
+	const response = await fetch("/api/save-output", {
+		method: "POST",
+		headers: {
+			"Content-Type": "image/png",
+			"X-Output-Path": relativePath,
+		},
+		body: await canvasBlob(canvas),
+	})
+	if (!response.ok) {
+		throw new Error(`Could not save ${relativePath}`)
+	}
+	console.log(`Saved ${relativePath}`)
+}
+
+// Writes the canvas into output/<algorithm>/ through the dev server.
+export const saveImage = (sketch: p5, algorithmName?: string): void => {
+	void writeImage(sketch, algorithmName).catch((error: unknown) => {
+		console.error(error)
+	})
 }

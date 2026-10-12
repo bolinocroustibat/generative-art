@@ -96,4 +96,4 @@ Available palettes can be found in `data/colorsPalettes.ts`. This decoupled appr
 
 All sketches support the following keyboard controls:
 - **Space**: Generate a new variation with a random seed
-- **S**: Save the current canvas as a PNG image
+- **S**: Save the current canvas as a PNG image in `output/<algorithm>/`
