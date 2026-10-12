@@ -19,5 +19,8 @@ license = {text = "MIT"}
 line-length = 100
 lint = { extend-select = ["I"] }
 
-[tool.uv]
-dev-dependencies = ["ruff>=0.9.9",]
+[dependency-groups]
+dev = [
+    "ruff>=0.9.9",
+    "ty>=0.0.86",
+]

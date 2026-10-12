@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import cast
 
 import cv2
 import numpy as np
@@ -38,8 +39,8 @@ def rotate_frame(frame: NDArray[np.uint8], angle: int) -> NDArray[np.uint8]:
     # Create rotation matrix
     rotation_matrix = cv2.getRotationMatrix2D(center, angle, 1.0)
 
-    # Perform rotation
-    return cv2.warpAffine(frame, rotation_matrix, (width, height))
+    # Perform rotation. OpenCV's stubs widen the dtype, but warpAffine keeps uint8.
+    return cast(NDArray[np.uint8], cv2.warpAffine(frame, rotation_matrix, (width, height)))
 
 
 def extract_still(
@@ -95,13 +96,12 @@ def extract_still(
     # Set frame position
     cap.set(cv2.CAP_PROP_POS_FRAMES, target_frame)
 
-    # Read frame
-    ret: bool
-    frame: NDArray[np.uint8]
-    ret, frame = cap.read()
+    # Read frame. Stubs type the image as a generic array; video frames are uint8.
+    ret, raw_frame = cap.read()
     if not ret:
         logger.error("Error: Could not read frame")
         return
+    frame = cast(NDArray[np.uint8], raw_frame)
 
     # Apply rotation based on force_rotation parameter or metadata
     if force_rotation is not None:

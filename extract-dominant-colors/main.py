@@ -75,8 +75,8 @@ for cluster_center in cluster_centers:
     )
 
 logger.info("Dominant colors:")
-for i, (r, g, b) in enumerate(dominant_colors, 1):
-    hex_color = rgb_to_hex(r, g, b)
+for i, (red, green, blue) in enumerate(dominant_colors, 1):
+    hex_color = rgb_to_hex(red, green, blue)
     logger.info(f"Color {i}: {hex_color}")
 
 logger.info("Displaying results")
