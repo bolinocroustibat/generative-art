@@ -36,7 +36,7 @@ const sketch = (p: p5) => {
 
 		for (let i = 0; i < cc; i++) {
 			const s = p.map(i, 0, cc, p.width * 1.5, ss)
-			
+
 			p.push()
 			p.translate(p.width / 2, p.height / 2)
 			p.rotate(p.map(i, 0, cc, rot, 0))
@@ -54,13 +54,13 @@ const sketch = (p: p5) => {
 	const drawLeaf = (x: number, y: number, s: number, color: p5.Color): void => {
 		p.push()
 		p.translate(x, y)
-		
+
 		const leafWidth = s * p.random(0.4, 0.6)
-		
+
 		// Main leaf shape
 		p.fill(color)
 		p.beginShape()
-		p.vertex(0, -s)  // Tip
+		p.vertex(0, -s) // Tip
 		p.bezierVertex(-leafWidth, -s * 0.7)
 		p.bezierVertex(-leafWidth, s * 0.3)
 		p.bezierVertex(0, s)
@@ -74,7 +74,7 @@ const sketch = (p: p5) => {
 		p.strokeWeight(s * 0.01)
 		p.noFill()
 		const numVeins = 5
-		for(let i = 0; i < numVeins; i++) {
+		for (let i = 0; i < numVeins; i++) {
 			const t = i / (numVeins - 1)
 			const yPos = p.lerp(-s * 0.8, s * 0.8, t)
 			const xWidth = leafWidth * 0.8 * p.sin(t * p.PI)
@@ -105,4 +105,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

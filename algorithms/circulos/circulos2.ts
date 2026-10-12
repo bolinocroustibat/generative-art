@@ -24,8 +24,8 @@ class Cube {
 
 	draw(p: p5) {
 		p.push()
-		p.translate(this.x/90, this.y/90, this.z/90)
-		
+		p.translate(this.x / 90, this.y / 90, this.z / 90)
+
 		// Front face
 		p.beginShape(p.QUADS)
 		p.texture(this.faces[0])
@@ -84,7 +84,12 @@ class Cube {
 	}
 }
 
-const createTexture = (p: p5, w: number, h: number, col: p5.Color): p5.Image => {
+const createTexture = (
+	p: p5,
+	w: number,
+	h: number,
+	col: p5.Color,
+): p5.Image => {
 	const aux = p.createImage(w, h)
 	aux.loadPixels()
 	for (let i = 0; i < aux.pixels.length; i++) {
@@ -95,7 +100,12 @@ const createTexture = (p: p5, w: number, h: number, col: p5.Color): p5.Image => 
 	return aux
 }
 
-const createSquare = (p: p5, w: number, h: number, colors: string[]): p5.Graphics => {
+const createSquare = (
+	p: p5,
+	w: number,
+	h: number,
+	colors: string[],
+): p5.Graphics => {
 	const f = createTexture(p, w, h, p.color("#F2F2EB"))
 	const aux = p.createGraphics(w, h)
 	let ang: number, dist: number, tam: number
@@ -131,8 +141,8 @@ const sketch = (p: p5) => {
 	let seed: number
 	let colors: string[]
 	let cubes: Cube[]
-	let rotX = p.PI/4
-	let rotY = p.PI/4
+	let rotX = p.PI / 4
+	let rotY = p.PI / 4
 
 	p.setup = async () => {
 		const dimensions = getCanvasDimensions(p)
@@ -144,7 +154,15 @@ const sketch = (p: p5) => {
 		p.textureMode(p.NORMAL)
 		cubes = []
 		for (let i = 0; i < 40; i++) {
-			cubes.push(new Cube(p, p.random(p.width), p.random(p.height), p.random(1000), colors))
+			cubes.push(
+				new Cube(
+					p,
+					p.random(p.width),
+					p.random(p.height),
+					p.random(1000),
+					colors,
+				),
+			)
 		}
 	}
 
@@ -172,7 +190,15 @@ const sketch = (p: p5) => {
 			seed = p.floor(p.random(999999))
 			cubes = []
 			for (let i = 0; i < 40; i++) {
-				cubes.push(new Cube(p, p.random(p.width), p.random(p.height), p.random(1000), colors))
+				cubes.push(
+					new Cube(
+						p,
+						p.random(p.width),
+						p.random(p.height),
+						p.random(1000),
+						colors,
+					),
+				)
 			}
 		},
 		algorithmName: "circulos2",

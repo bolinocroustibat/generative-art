@@ -24,25 +24,33 @@ const sketch = (p: p5) => {
 		const cant = p.floor(p.random(3, 200))
 		const tam_max = p.dist(0, 0, p.width, p.height)
 		const incremento = tam_max / cant
-		const x = p.width/2
-		const y = p.height/2
-		
+		const x = p.width / 2
+		const y = p.height / 2
+
 		// Select a base color from the palette
 		const baseColorIndex = p.floor(p.random(colors.length))
 		const col = p.color(colors[baseColorIndex])
 
 		for (let i = 0; i < cant; i++) {
-			const tam = tam_max - (incremento * i)
+			const tam = tam_max - incremento * i
 			const cc = 2 * p.floor(p.random(1, 10))
 			// Alternate between shifting hue and using different palette colors
-			const c = i % 2 === 0 
-				? desplazar(col, 1/p.floor(p.random(2, 5)))
-				: p.color(colors[(baseColorIndex + i) % colors.length])
+			const c =
+				i % 2 === 0
+					? desplazar(col, 1 / p.floor(p.random(2, 5)))
+					: p.color(colors[(baseColorIndex + i) % colors.length])
 			circulo(x, y, tam, tam, cc, c)
 		}
 	}
 
-	const circulo = (x: number, y: number, w: number, h: number, cant: number, col: p5.Color): void => {
+	const circulo = (
+		x: number,
+		y: number,
+		w: number,
+		h: number,
+		cant: number,
+		col: p5.Color,
+	): void => {
 		p.noStroke()
 		const da = p.TWO_PI / cant
 		for (let i = 0; i < cant; i++) {
@@ -52,11 +60,7 @@ const sketch = (p: p5) => {
 	}
 
 	const luz = (col: p5.Color, c: number): p5.Color => {
-		return p.color(
-			p.red(col) + c,
-			p.green(col) + c,
-			p.blue(col) + c
-		)
+		return p.color(p.red(col) + c, p.green(col) + c, p.blue(col) + c)
 	}
 
 	const desplazar = (ori: p5.Color, d: number): p5.Color => {
@@ -65,7 +69,7 @@ const sketch = (p: p5) => {
 		const aux = p.color(
 			(p.hue(ori) + 256 * d) % 256,
 			p.saturation(ori),
-			p.brightness(ori)
+			p.brightness(ori),
 		)
 		p.pop()
 		return aux

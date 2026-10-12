@@ -32,30 +32,36 @@ const sketch = (p: p5) => {
 		p.noStroke()
 		for (let i = 0; i < particleCount; i++) {
 			const x = p.random(p.width)
-			const dy = Math.pow(p.map(i, 0, particleCount, 0.2, 1), 8)
+			const dy = p.map(i, 0, particleCount, 0.2, 1) ** 8
 			const y = p.height * p.map(dy, 0, 1, 0, 1)
 			const s = p.width * (0.01 + p.random(0.01) * dy)
 
-			p.fill(getColor(p.noise(desc + x * detc, desc + y * detc) * colors.length * 4))
+			p.fill(
+				getColor(p.noise(desc + x * detc, desc + y * detc) * colors.length * 4),
+			)
 			p.ellipse(x, y, s, s)
 		}
 	}
 
 	const flower = (x: number, y: number, s: number): void => {
 		let c1 = rcol()
-		while (p.red(c1) === p.red(backgroundColor) && 
-				p.green(c1) === p.green(backgroundColor) && 
-				p.blue(c1) === p.blue(backgroundColor)) {
+		while (
+			p.red(c1) === p.red(backgroundColor) &&
+			p.green(c1) === p.green(backgroundColor) &&
+			p.blue(c1) === p.blue(backgroundColor)
+		) {
 			c1 = rcol()
 		}
 
 		let c2 = rcol()
-		while ((p.red(c2) === p.red(backgroundColor) && 
-				p.green(c2) === p.green(backgroundColor) && 
-				p.blue(c2) === p.blue(backgroundColor)) || 
-				(p.red(c2) === p.red(c1) && 
-				p.green(c2) === p.green(c1) && 
-				p.blue(c2) === p.blue(c1))) {
+		while (
+			(p.red(c2) === p.red(backgroundColor) &&
+				p.green(c2) === p.green(backgroundColor) &&
+				p.blue(c2) === p.blue(backgroundColor)) ||
+			(p.red(c2) === p.red(c1) &&
+				p.green(c2) === p.green(c1) &&
+				p.blue(c2) === p.blue(c1))
+		) {
 			c2 = rcol()
 		}
 
@@ -96,10 +102,17 @@ const sketch = (p: p5) => {
 		p.pop()
 	}
 
-	const petal = (s1: number, s2: number, pwr1: number, pwr2: number, dc1: number, dc2: number): void => {
+	const petal = (
+		s1: number,
+		s2: number,
+		pwr1: number,
+		pwr2: number,
+		dc1: number,
+		dc2: number,
+	): void => {
 		const r1 = s1 * 0.5
 		const r2 = s2 * 0.5
-		const vertexCount = p.floor(p.TWO_PI * p.sqrt(((r1 * r1) + (r2 * r2)) / 2))
+		const vertexCount = p.floor(p.TWO_PI * p.sqrt((r1 * r1 + r2 * r2) / 2))
 		const angleStep = p.TWO_PI / vertexCount
 
 		p.beginShape()
@@ -107,8 +120,8 @@ const sketch = (p: p5) => {
 			const ang = angleStep * i
 			let dx = p.cos(ang)
 			let dy = p.sin(ang)
-			dx = sign(dx) * Math.pow(Math.abs(dx), pwr1)
-			dy = sign(dy) * Math.pow(Math.abs(dy), pwr2)
+			dx = sign(dx) * Math.abs(dx) ** pwr1
+			dy = sign(dy) * Math.abs(dy) ** pwr2
 			p.vertex(dx * r1, dy * r2)
 		}
 		p.endShape(p.CLOSE)

@@ -27,11 +27,11 @@ const sketch = (p: p5) => {
 
 		const amount = p.floor(p.random(2, 8))
 		for (let i = 0; i < amount; ++i) {
-			const x = p.width/2
-			const y = p.height/2
+			const x = p.width / 2
+			const y = p.height / 2
 			let px = x
 			let py = y
-			let ang = p.random(p.PI + p.PI/2, p.TWO_PI - p.PI/2)
+			let ang = p.random(p.PI + p.PI / 2, p.TWO_PI - p.PI / 2)
 			p.stroke(90)
 			p.strokeWeight(0.6)
 			p.strokeCap(p.ROUND)
@@ -61,14 +61,14 @@ const sketch = (p: p5) => {
 		const des = 14
 		const tt = des * p.random(0.2, 0.48)
 		const tt2 = tt * p.random(0.3, 0.95)
-		p.strokeWeight(des/8)
+		p.strokeWeight(des / 8)
 		const desx = -p.random(des)
 		const desy = -p.random(des)
 		p.strokeCap(p.SQUARE)
-		for (let j = 0; j < p.height/des + 1; j++) {
+		for (let j = 0; j < p.height / des + 1; j++) {
 			const yy = desy + des * j
 			p.stroke(p.map(j, 0, p.height, 40, 50))
-			for (let i = 0; i < p.width/des + 1; i++) {
+			for (let i = 0; i < p.width / des + 1; i++) {
 				const xx = desx + des * i
 				const t = (i + j) % 2 === 0 ? tt2 : tt
 				p.line(xx - t, yy - t, xx + t, yy + t)
@@ -87,4 +87,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

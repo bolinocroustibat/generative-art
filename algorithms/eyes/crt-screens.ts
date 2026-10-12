@@ -29,12 +29,12 @@ const sketch = (p: p5) => {
 		const x = 0
 		const y = 0
 		const screenCount = p.floor(p.random(10, 200))
-		const mdx = p.random(0.3, 0.4)    // narrower horizontally
-		const mdy = p.random(0.2, 0.3)    // taller vertically
+		const mdx = p.random(0.3, 0.4) // narrower horizontally
+		const mdy = p.random(0.2, 0.3) // taller vertically
 		const ic = p.random(colors.length)
 		const dc = p.random(10) * p.random(1)
 		const minScreenSize = p.random(50, 260)
-		const rot = p.random(-p.PI * 0.1, p.PI * 0.1)  // Reduced rotation range for more upright screens
+		const rot = p.random(-p.PI * 0.1, p.PI * 0.1) // Reduced rotation range for more upright screens
 
 		for (let i = 0; i < screenCount; i++) {
 			const screenSize = p.map(i, 0, screenCount, p.width * 1.5, minScreenSize)
@@ -58,7 +58,13 @@ const sketch = (p: p5) => {
 		p.pop()
 	}
 
-	const drawCRTScreen = (x: number, y: number, s: number, mx: number, my: number): void => {
+	const drawCRTScreen = (
+		x: number,
+		y: number,
+		s: number,
+		mx: number,
+		my: number,
+	): void => {
 		p.beginShape()
 		// Top
 		p.vertex(x - s * 0.9, y - s * 0.7)
@@ -82,9 +88,9 @@ const sketch = (p: p5) => {
 
 	const drawCenterScreen = (x: number, y: number, s: number): void => {
 		p.fill(p.color("#EADBC6"))
-		drawCRTScreen(x, y, s * 0.6, s * 0.3, s * 0.2)  // Reduced size to 60% of original
+		drawCRTScreen(x, y, s * 0.6, s * 0.3, s * 0.2) // Reduced size to 60% of original
 	}
- 
+
 	const rcol = (): p5.Color => {
 		return p.color(colors[p.floor(p.random(colors.length))])
 	}
@@ -106,4 +112,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

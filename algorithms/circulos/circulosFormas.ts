@@ -22,15 +22,17 @@ const sketch = (p: p5) => {
 		p.background(getRandomColor(p, colors))
 		const cantplanos = 8
 		for (let j = 0; j < cantplanos; j++) {
-			const cx = p.width/2
-			const cy = p.height/2
+			const cx = p.width / 2
+			const cy = p.height / 2
 			const tam = p.map(j, 0, cantplanos, -10, p.width)
 			const t = p.map(j, 0, cantplanos, 10, 160)
-			const cant = p.floor(p.map(j, 0, cantplanos, 1000, 300) * p.map(j, 0, cantplanos, 2, 0.6))
+			const cant = p.floor(
+				p.map(j, 0, cantplanos, 1000, 300) * p.map(j, 0, cantplanos, 2, 0.6),
+			)
 			for (let i = 0; i < cant; i++) {
 				const x = p.random(p.width)
 				const y = p.random(p.height)
-				if (p.dist(x, y, cx, cy) > tam/2 + t/2) {
+				if (p.dist(x, y, cx, cy) > tam / 2 + t / 2) {
 					const c = p.floor(p.random(3, 8))
 					const ang = p.random(p.TWO_PI)
 					const hun = p.random(0.5, 1)
@@ -57,9 +59,15 @@ const sketch = (p: p5) => {
 		}
 	}
 
-	const forma = (x: number, y: number, d: number, c: number, ang: number): void => {
-		const r = d/2
-		const da = p.TWO_PI/c
+	const forma = (
+		x: number,
+		y: number,
+		d: number,
+		c: number,
+		ang: number,
+	): void => {
+		const r = d / 2
+		const da = p.TWO_PI / c
 		p.beginShape()
 		for (let i = 0; i < c; i++) {
 			p.vertex(x + p.cos(da * i + ang) * r, y + p.sin(da * i + ang) * r)
@@ -67,15 +75,25 @@ const sketch = (p: p5) => {
 		p.endShape(p.CLOSE)
 	}
 
-	const estrella = (x: number, y: number, d: number, c: number, ang: number, hun: number): void => {
-		const r = d/2
-		const da = p.TWO_PI/c
+	const estrella = (
+		x: number,
+		y: number,
+		d: number,
+		c: number,
+		ang: number,
+		hun: number,
+	): void => {
+		const r = d / 2
+		const da = p.TWO_PI / c
 		p.beginShape()
 		for (let i = 0; i < c; i += 0.5) {
 			if (i % 1 === 0) {
 				p.vertex(x + p.cos(da * i + ang) * r, y + p.sin(da * i + ang) * r)
 			} else {
-				p.vertex(x + p.cos(da * i + ang) * r * hun, y + p.sin(da * i + ang) * r * hun)
+				p.vertex(
+					x + p.cos(da * i + ang) * r * hun,
+					y + p.sin(da * i + ang) * r * hun,
+				)
 			}
 		}
 		p.endShape(p.CLOSE)

@@ -34,20 +34,20 @@ const sketch = (p: p5) => {
 		for (let i = 0; i < particleCount; i++) {
 			const x = p.random(p.width)
 			const y = p.random(p.height)
-			
+
 			// Use noise to create clusters of points
 			const noiseVal = p.noise(x * detc + desc, y * detc + desc)
-			
+
 			// Size varies with noise
 			const s = p.width * p.map(noiseVal, 0, 1, 0.001, 0.008)
-			
+
 			// Color based on noise value
 			const col = getColor(noiseVal * colors.length * 4)
-			
+
 			// Opacity varies with position and noise
 			const alpha = p.map(noiseVal, 0, 1, 20, 180)
 			p.fill(p.red(col), p.green(col), p.blue(col), alpha)
-			
+
 			p.ellipse(x, y, s, s)
 		}
 	}

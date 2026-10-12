@@ -168,7 +168,9 @@ const sketch = (p: p5) => {
 
 		for (let i = 0; i < slabs.length; i++) {
 			const slab = slabs[i]
-			const wave = Math.sin(time * 0.7 + slab.phase + (slab.x + slab.y) * 0.00035)
+			const wave = Math.sin(
+				time * 0.7 + slab.phase + (slab.x + slab.y) * 0.00035,
+			)
 			const amount = 0.06 + 0.94 * (0.5 + 0.5 * wave)
 			drawSlab(slab, slab.maxHeight * amount, true)
 			drawSlab(slab, slab.maxHeight, false)

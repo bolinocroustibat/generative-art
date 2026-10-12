@@ -15,6 +15,7 @@
 			"!dist",
 			"!build",
 			"!.git",
+			"!processing",
 			"!extract-dominant-colors",
 			"!extract-still-image",
 			"!images-average-gan"

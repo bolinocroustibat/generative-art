@@ -22,7 +22,7 @@ const sketch = (p: p5) => {
 
 	const generate = () => {
 		p.background(250)
-		const arbol = new Arbol(p.width/2, p.height/3*2, p.height/3)
+		const arbol = new Arbol(p.width / 2, (p.height / 3) * 2, p.height / 3)
 		arbol.init()
 	}
 
@@ -57,19 +57,25 @@ const sketch = (p: p5) => {
 				this.probRami = p.random(1)
 			}
 			p.stroke(0)
-			const des = this.h * p.map(this.cantRamas, 2, 8, 0.5, 0.20)
-			const ang = p.TWO_PI - p.PI/2 + this.desang
+			const des = this.h * p.map(this.cantRamas, 2, 8, 0.5, 0.2)
+			const ang = p.TWO_PI - p.PI / 2 + this.desang
 			this.rama(this.x, this.y, this.cantRamas, ang, des)
 
 			if (this.struc) this.drawStruc()
 		}
 
-		private rama(px: number, py: number, rama: number, ang: number, des: number): void {
+		private rama(
+			px: number,
+			py: number,
+			rama: number,
+			ang: number,
+			des: number,
+		): void {
 			const x = px + p.cos(ang) * des
 			const y = py + p.sin(ang) * des
-			p.strokeWeight(p.map(rama, 0, this.cantRamas-1, 1, 5))
+			p.strokeWeight(p.map(rama, 0, this.cantRamas - 1, 1, 5))
 			p.line(px, py, x, y)
-			des *= p.map(rama, 2, 8, 1, 0.70)
+			des *= p.map(rama, 2, 8, 1, 0.7)
 			ang += this.desang
 			rama -= 1
 			if (rama < 0) return
@@ -79,7 +85,9 @@ const sketch = (p: p5) => {
 				cant = p.floor(p.random(this.maxRami) + 1)
 			}
 			for (let i = 0; i < cant; i++) {
-				const auxang = ang + this.desang * (i - cant/2 + (p.random(1) < 0.5 ? 0 : 0.5)) * 80
+				const auxang =
+					ang +
+					this.desang * (i - cant / 2 + (p.random(1) < 0.5 ? 0 : 0.5)) * 80
 				this.rama(x, y, rama, auxang, des)
 			}
 		}
@@ -89,9 +97,9 @@ const sketch = (p: p5) => {
 			p.stroke(75, 158, 255, 80) // #4B9EFF with alpha
 			p.noFill()
 			p.line(this.x, this.y - this.h, this.x, this.y)
-			p.line(this.x - this.w/2, this.y - this.h, this.x + this.w/2, this.y)
-			p.line(this.x - this.w/2, this.y, this.x + this.w/2, this.y - this.h)
-			p.rect(this.x - this.w/2, this.y - this.h, this.w, this.h)
+			p.line(this.x - this.w / 2, this.y - this.h, this.x + this.w / 2, this.y)
+			p.line(this.x - this.w / 2, this.y, this.x + this.w / 2, this.y - this.h)
+			p.rect(this.x - this.w / 2, this.y - this.h, this.w, this.h)
 		}
 	}
 
@@ -105,4 +113,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

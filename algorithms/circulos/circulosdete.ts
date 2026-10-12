@@ -23,17 +23,17 @@ const sketch = (p: p5) => {
 		const bordes = p.floor(p.random(4, 12)) * 2
 		const tam = p.floor(p.random(4, 10))
 		const cx = (p.width - bordes * 2) / tam
-		const sw = ((p.width - bordes * 2) - cx * tam) / (cx - 1)
+		const sw = (p.width - bordes * 2 - cx * tam) / (cx - 1)
 		const cy = (p.height - bordes * 2) / tam
-		const sh = ((p.height - bordes * 2) - cy * tam) / (cy - 1)
+		const sh = (p.height - bordes * 2 - cy * tam) / (cy - 1)
 		p.noStroke()
 		for (let j = 0; j < cy; j++) {
 			for (let i = 0; i < cx; i++) {
-				const x = bordes + tam/2 + (tam + sw) * i
-				const y = bordes + tam/2 + (tam + sh) * j
+				const x = bordes + tam / 2 + (tam + sw) * i
+				const y = bordes + tam / 2 + (tam + sh) * j
 				const ang = p.random(p.TWO_PI)
 				const cant = p.floor(p.random(2, 12))
-				const da = p.TWO_PI/cant
+				const da = p.TWO_PI / cant
 				for (let k = 0; k < cant; k++) {
 					p.fill(getRandomColor(p, colors))
 					p.arc(x, y, tam, tam, ang + da * k, ang + da * (k + 1))

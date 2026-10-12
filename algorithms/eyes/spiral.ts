@@ -35,7 +35,7 @@ const sketch = (p: p5) => {
 		// Draw background spirals
 		for (let i = 0; i < cc; i++) {
 			const s = p.map(i, 0, cc, p.width * 1.5, ss)
-			
+
 			p.push()
 			p.translate(p.width / 2, p.height / 2)
 			p.rotate(p.map(i, 0, cc, rot, 0))
@@ -50,29 +50,34 @@ const sketch = (p: p5) => {
 		p.pop()
 	}
 
-	const drawSpiral = (x: number, y: number, s: number, color: p5.Color): void => {
+	const drawSpiral = (
+		x: number,
+		y: number,
+		s: number,
+		color: p5.Color,
+	): void => {
 		p.push()
 		p.translate(x, y)
-		
+
 		const numArms = p.floor(p.random(3, 7))
 		const rotations = p.random(1, 3)
 		const points = 50
-		
-		for(let arm = 0; arm < numArms; arm++) {
+
+		for (let arm = 0; arm < numArms; arm++) {
 			p.fill(color)
 			p.beginShape()
-			
+
 			// Start at center
 			p.vertex(0, 0)
-			
-			for(let i = 0; i <= points; i++) {
+
+			for (let i = 0; i <= points; i++) {
 				const t = i / points
 				const angle = p.TWO_PI * rotations * t + (p.TWO_PI / numArms) * arm
 				const radius = s * (1 - t)
 				const px = p.cos(angle) * radius
 				const py = p.sin(angle) * radius
-				
-				if(i === 0) {
+
+				if (i === 0) {
 					p.vertex(0, 0)
 				} else {
 					p.splineVertex(px, py)
@@ -85,9 +90,9 @@ const sketch = (p: p5) => {
 		p.noFill()
 		p.stroke(p.color(0, 40))
 		p.strokeWeight(s * 0.01)
-		for(let arm = 0; arm < numArms; arm++) {
+		for (let arm = 0; arm < numArms; arm++) {
 			p.beginShape()
-			for(let i = 0; i <= points; i++) {
+			for (let i = 0; i <= points; i++) {
 				const t = i / points
 				const angle = p.TWO_PI * rotations * t + (p.TWO_PI / numArms) * arm
 				const radius = s * (1 - t) * 0.8
@@ -121,4 +126,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

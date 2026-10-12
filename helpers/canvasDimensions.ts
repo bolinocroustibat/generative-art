@@ -6,7 +6,7 @@ export const getCanvasDimensions = (
 	p: p5,
 ): { width: number; height: number } => {
 	// Check if the canvas dimensions are defined in settings.ts
-	// @ts-ignore - This is intentional to check if the variables exist
+	// @ts-expect-error - This is intentional to check if the variables exist
 	if (
 		typeof CANVAS_WIDTH !== "undefined" &&
 		typeof CANVAS_HEIGHT !== "undefined"

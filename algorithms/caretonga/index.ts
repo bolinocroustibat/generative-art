@@ -2,8 +2,8 @@ import p5 from "p5"
 import {
 	getCanvasDimensions,
 	getColorPalette,
-	getRandomColor,
 	getInterpolatedColor,
+	getRandomColor,
 	setupKeyboardControls,
 } from "../../helpers"
 
@@ -72,28 +72,28 @@ const sketch = (p: p5) => {
 				p.strokeWeight(0.5)
 				p.noFill()
 				p.stroke(colorWithAlpha(40))
-				const x = p.width/2 + dim * (ii - cw/2 + 0.5)
-				const y = p.height/2 + dim * (jj - ch/2 + 0.5)
+				const x = p.width / 2 + dim * (ii - cw / 2 + 0.5)
+				const y = p.height / 2 + dim * (jj - ch / 2 + 0.5)
 
 				const cant = p.floor(p.random(1, 5))
-				for (let j = -cant/2; j < cant/2 + cant%2; j++) {
-					for (let i = -cant/2; i < cant/2 + cant%2; i++) {
-						const tam = dim/cant
+				for (let j = -cant / 2; j < cant / 2 + (cant % 2); j++) {
+					for (let i = -cant / 2; i < cant / 2 + (cant % 2); i++) {
+						const tam = dim / cant
 						let dd = 0
-						if (cant%2 === 0) dd = tam/2
-						const xx = x + (i - j) * tam/2
-						const yy = y + (i + j) * tam/2 + dd
+						if (cant % 2 === 0) dd = tam / 2
+						const xx = x + ((i - j) * tam) / 2
+						const yy = y + ((i + j) * tam) / 2 + dd
 					}
 				}
 
 				p.noStroke()
-				for (let j = -cant/2; j < cant/2 + cant%2; j++) {
-					for (let i = -cant/2; i < cant/2 + cant%2; i++) {
-						const tam = dim/cant
+				for (let j = -cant / 2; j < cant / 2 + (cant % 2); j++) {
+					for (let i = -cant / 2; i < cant / 2 + (cant % 2); i++) {
+						const tam = dim / cant
 						let dd = 0
-						if (cant%2 === 0) dd = tam/2
-						const xx = x + (i - j) * tam/2
-						const yy = y + (i + j) * tam/2 + dd
+						if (cant % 2 === 0) dd = tam / 2
+						const xx = x + ((i - j) * tam) / 2
+						const yy = y + ((i + j) * tam) / 2 + dd
 						for (let k = 0; k < 4; k++) {
 							const cc = p.floor(p.random(4))
 							p.fill(colorWithAlpha(200))
@@ -117,16 +117,16 @@ const sketch = (p: p5) => {
 
 	const rector = (x: number, y: number, tam: number, cant: number): void => {
 		p.beginShape()
-		const ang = p.PI/2
+		const ang = p.PI / 2
 		for (let i = 0; i < 4; i++) {
-			p.vertex(x + p.cos(ang * i) * tam/2, y + p.sin(ang * i) * tam/2)
+			p.vertex(x + (p.cos(ang * i) * tam) / 2, y + (p.sin(ang * i) * tam) / 2)
 		}
 		p.endShape(p.CLOSE)
 	}
 
 	const figura = (x: number, y: number, tam: number, cant: number): void => {
 		p.beginShape()
-		const ang = p.PI/2
+		const ang = p.PI / 2
 		const da = p.floor(p.random(4))
 		const c = 2 + p.floor(p.random(4))
 		if (c === 2) return
@@ -135,7 +135,10 @@ const sketch = (p: p5) => {
 				p.vertex(x, y)
 				continue
 			}
-			p.vertex(x + p.cos(ang * (da + i)) * tam/2, y + p.sin(ang * (da + i)) * tam/2)
+			p.vertex(
+				x + (p.cos(ang * (da + i)) * tam) / 2,
+				y + (p.sin(ang * (da + i)) * tam) / 2,
+			)
 		}
 		p.endShape(p.CLOSE)
 	}
@@ -150,4 +153,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-new p5(sketch) 
+new p5(sketch)

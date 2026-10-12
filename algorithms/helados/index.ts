@@ -1,4 +1,4 @@
-import p5 from "p5"
+import type p5 from "p5"
 import {
 	getCanvasDimensions,
 	getColorPalette,
@@ -25,7 +25,12 @@ const sketch = (p: p5) => {
 		p.background(255)
 		p.stroke(0, 20)
 		for (let i = 0; i < 100; i++) {
-			p.line(p.random(p.width), p.random(p.height), p.random(p.width), p.random(p.height))
+			p.line(
+				p.random(p.width),
+				p.random(p.height),
+				p.random(p.width),
+				p.random(p.height),
+			)
 		}
 		for (let i = 0; i < 20; i++) {
 			helado1(p.random(p.width), p.random(p.height), p.random(20, 40))
@@ -81,4 +86,4 @@ const sketch = (p: p5) => {
 	})
 }
 
-export default sketch 
+export default sketch

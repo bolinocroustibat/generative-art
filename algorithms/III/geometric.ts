@@ -88,19 +88,19 @@ const sketch = (p: p5) => {
 		const s = size * 0.8
 		p.fill(rcol())
 		p.beginShape()
-		p.vertex(-s/2, -s/2)
-		p.vertex(s/2, -s/2)
-		p.vertex(s/2, s/2)
-		p.vertex(-s/2, s/2)
+		p.vertex(-s / 2, -s / 2)
+		p.vertex(s / 2, -s / 2)
+		p.vertex(s / 2, s / 2)
+		p.vertex(-s / 2, s / 2)
 		p.endShape(p.CLOSE)
 
 		// Inner detail
 		p.fill(rcol())
 		p.beginShape()
-		p.vertex(-s/4, -s/4)
-		p.vertex(s/4, -s/4)
-		p.vertex(s/4, s/4)
-		p.vertex(-s/4, s/4)
+		p.vertex(-s / 4, -s / 4)
+		p.vertex(s / 4, -s / 4)
+		p.vertex(s / 4, s / 4)
+		p.vertex(-s / 4, s / 4)
 		p.endShape(p.CLOSE)
 	}
 
@@ -108,17 +108,17 @@ const sketch = (p: p5) => {
 		const s = size * 0.8
 		p.fill(rcol())
 		p.beginShape()
-		p.vertex(0, -s/2)
-		p.vertex(s/2, s/2)
-		p.vertex(-s/2, s/2)
+		p.vertex(0, -s / 2)
+		p.vertex(s / 2, s / 2)
+		p.vertex(-s / 2, s / 2)
 		p.endShape(p.CLOSE)
 
 		// Inner detail
 		p.fill(rcol())
 		p.beginShape()
-		p.vertex(0, -s/4)
-		p.vertex(s/4, s/4)
-		p.vertex(-s/4, s/4)
+		p.vertex(0, -s / 4)
+		p.vertex(s / 4, s / 4)
+		p.vertex(-s / 4, s / 4)
 		p.endShape(p.CLOSE)
 	}
 
@@ -128,8 +128,8 @@ const sketch = (p: p5) => {
 		p.fill(rcol())
 		p.beginShape()
 		for (let i = 0; i < 6; i++) {
-			const x = p.cos(angle * i) * s/2
-			const y = p.sin(angle * i) * s/2
+			const x = (p.cos(angle * i) * s) / 2
+			const y = (p.sin(angle * i) * s) / 2
 			p.vertex(x, y)
 		}
 		p.endShape(p.CLOSE)
@@ -138,8 +138,8 @@ const sketch = (p: p5) => {
 		p.fill(rcol())
 		p.beginShape()
 		for (let i = 0; i < 6; i++) {
-			const x = p.cos(angle * i) * s/4
-			const y = p.sin(angle * i) * s/4
+			const x = (p.cos(angle * i) * s) / 4
+			const y = (p.sin(angle * i) * s) / 4
 			p.vertex(x, y)
 		}
 		p.endShape(p.CLOSE)
@@ -172,4 +172,4 @@ const sketch = (p: p5) => {
 }
 
 // Create a new p5 instance with the sketch
-new p5(sketch) 
+new p5(sketch)

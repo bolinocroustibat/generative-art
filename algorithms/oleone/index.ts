@@ -44,7 +44,8 @@ const sketch = (p: p5) => {
 
 				let x = xx
 				let y = yy
-				const dif = ang - (p.noise(des + x * det, des + y * det) * max) % p.TWO_PI
+				const dif =
+					ang - ((p.noise(des + x * det, des + y * det) * max) % p.TWO_PI)
 
 				const pathColor = rcol()
 				p.fill(p.red(pathColor), p.green(pathColor), p.blue(pathColor), 40)
