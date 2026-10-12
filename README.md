@@ -2,7 +2,7 @@
 
 A collection of generative art algorithms implemented in TypeScript using [p5.js](https://p5js.org/).
 
-![Example Image](output/antipi_1.png)
+![Example Image](output/antipi/1.png)
 
 ## Overview
 
