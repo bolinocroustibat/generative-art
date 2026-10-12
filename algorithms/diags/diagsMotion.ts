@@ -39,7 +39,6 @@ const sketch = (p: p5) => {
 	let colors: string[] = []
 	let ready = false
 	let cells: Cell[] = []
-	let cell = 1
 
 	p.setup = async (): Promise<void> => {
 		const dimensions = getCanvasDimensions(p)
@@ -55,27 +54,22 @@ const sketch = (p: p5) => {
 	const build = (): void => {
 		p.randomSeed(seed)
 		p.noiseSeed(seed)
-		const span = p.min(p.width, p.height)
-		const unit = span / 960
-		const margin = 50 * unit
-		const gap = 4 * unit
-		const inset = 2 * unit
-		const board = span - margin * 2
-		const columns = 8
-		cell = board / columns
-		const originX = (p.width - span) / 2 + margin
-		const originY = (p.height - span) / 2 + margin
+		const { columns, rows, ss, originX, originY } = squareGrid()
+		const gap = ss * 0.04
+		const inner = ss - gap
 		const next: Cell[] = []
 
-		for (let j = 0; j < columns; j++) {
+		for (let j = 0; j < rows; j++) {
 			for (let i = 0; i < columns; i++) {
+				const cx = originX + (i + 0.5) * ss
+				const cy = originY + (j + 0.5) * ss
 				const tile: Cell = {
-					cx: originX + (i + 0.5) * cell,
-					cy: originY + (j + 0.5) * cell,
-					x: originX + inset + i * cell,
-					y: originY + inset + j * cell,
-					inner: cell - gap,
-					mark: cell * 0.5,
+					cx,
+					cy,
+					x: cx - inner / 2,
+					y: cy - inner / 2,
+					inner,
+					mark: ss * 0.5,
 					wedges: [],
 					box: false,
 					disk: false,
@@ -84,7 +78,7 @@ const sketch = (p: p5) => {
 				}
 				if (p.random(1) < 0.4) {
 					tile.wash = {
-						h: cell * p.random(0.4, 1) - gap,
+						h: ss * p.random(0.4, 1) - gap,
 						color: rcol(),
 						phase: tile.phase,
 					}
@@ -99,6 +93,26 @@ const sketch = (p: p5) => {
 		}
 		cells = next
 		ready = true
+	}
+
+	const squareGrid = (): {
+		columns: number
+		rows: number
+		ss: number
+		originX: number
+		originY: number
+	} => {
+		const count = Math.max(1, p.int(p.random(4, p.random(30))))
+		const ss = p.min(p.width, p.height) / count
+		const columns = Math.max(1, Math.floor(p.width / ss))
+		const rows = Math.max(1, Math.floor(p.height / ss))
+		return {
+			columns,
+			rows,
+			ss,
+			originX: (p.width - columns * ss) / 2,
+			originY: (p.height - rows * ss) / 2,
+		}
 	}
 
 	const makeWedge = (phase: number): Wedge => {

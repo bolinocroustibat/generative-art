@@ -26,31 +26,23 @@ const sketch = (p: p5) => {
 		p.noiseSeed(seed)
 		p.background("#BAB9B6")
 
-		const span = p.min(p.width, p.height)
-		const unit = span / 960
-		const margin = 50 * unit
-		const gap = 4 * unit
-		const inset = 2 * unit
-		const board = span - margin * 2
-		const columns = 8
-		const cell = board / columns
-		const originX = (p.width - span) / 2 + margin
-		const originY = (p.height - span) / 2 + margin
+		const { columns, rows, ss, originX, originY } = squareGrid()
+		const gap = ss * 0.04
+		const inner = ss - gap
 
 		p.rectMode(p.CENTER)
 		p.noStroke()
-		for (let j = 0; j < columns; j++) {
+		for (let j = 0; j < rows; j++) {
 			for (let i = 0; i < columns; i++) {
-				const cx = originX + (i + 0.5) * cell
-				const cy = originY + (j + 0.5) * cell
+				const cx = originX + (i + 0.5) * ss
+				const cy = originY + (j + 0.5) * ss
 				p.fill(240)
-				p.rect(cx, cy, cell - gap, cell - gap)
+				p.rect(cx, cy, inner, inner)
 
-				const x = originX + inset + i * cell
-				const y = originY + inset + j * cell
-				const inner = cell - gap
+				const x = cx - inner / 2
+				const y = cy - inner / 2
 				if (p.random(1) < 0.4) {
-					wash(x, y, inner, cell * p.random(0.4, 1) - gap, rcol())
+					wash(x, y, inner, ss * p.random(0.4, 1) - gap, rcol())
 				}
 				if (p.random(1) < 0.4) {
 					corner(x, y, inner, inner, p.int(p.random(4)), rcol())
@@ -60,9 +52,29 @@ const sketch = (p: p5) => {
 				}
 
 				p.fill(rcol())
-				if (p.random(1) < 0.3) p.rect(cx, cy, cell * 0.5, cell * 0.5)
-				if (p.random(1) < 0.3) p.ellipse(cx, cy, cell * 0.5, cell * 0.5)
+				if (p.random(1) < 0.3) p.rect(cx, cy, ss * 0.5, ss * 0.5)
+				if (p.random(1) < 0.3) p.ellipse(cx, cy, ss * 0.5, ss * 0.5)
 			}
+		}
+	}
+
+	const squareGrid = (): {
+		columns: number
+		rows: number
+		ss: number
+		originX: number
+		originY: number
+	} => {
+		const count = Math.max(1, p.int(p.random(4, p.random(30))))
+		const ss = p.min(p.width, p.height) / count
+		const columns = Math.max(1, Math.floor(p.width / ss))
+		const rows = Math.max(1, Math.floor(p.height / ss))
+		return {
+			columns,
+			rows,
+			ss,
+			originX: (p.width - columns * ss) / 2,
+			originY: (p.height - rows * ss) / 2,
 		}
 	}
 

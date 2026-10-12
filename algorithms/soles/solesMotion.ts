@@ -38,16 +38,13 @@ const sketch = (p: p5) => {
 		if (base) base.remove()
 		for (const sun of suns) sun.sprite.remove()
 
-		const span = p.min(p.width, p.height)
-		const cc = p.int(p.random(4, p.random(30)))
-		const ss = span / (cc + 1)
-		const originX = (p.width - span) / 2
-		const originY = (p.height - span) / 2
+		const grid = squareGrid()
+		const { columns, rows, ss, originX, originY } = grid
 		const ds1 = p.random(10000)
 		const dt1 = p.random(0.01)
 		const ds2 = p.random(10000)
 		const dt2 = p.random(0.01)
-		const nudge = span / 960
+		const nudge = p.min(p.width, p.height) / 960
 		const corner = 2 * nudge
 
 		base = p.createGraphics(p.width, p.height)
@@ -57,12 +54,12 @@ const sketch = (p: p5) => {
 		base.noStroke()
 
 		const next: Sun[] = []
-		for (let j = 0; j < cc; j++) {
-			for (let i = 0; i < cc; i++) {
-				const gx = (i + 1) * ss
-				const gy = (j + 1) * ss
-				const xx = originX + gx
-				const yy = originY + gy
+		for (let j = 0; j < rows; j++) {
+			for (let i = 0; i < columns; i++) {
+				const xx = originX + (i + 0.5) * ss
+				const yy = originY + (j + 0.5) * ss
+				const gx = xx
+				const gy = yy
 
 				base.fill(rcol())
 				base.rect(
@@ -142,13 +139,33 @@ const sketch = (p: p5) => {
 					x: xx,
 					y: yy,
 					sprite: face,
-					spin: ((i + j * Math.max(cc, 1)) % 5) - 2,
+					spin: ((i + j * columns) % 5) - 2,
 				})
 			}
 		}
 
 		suns = next
 		ready = true
+	}
+
+	const squareGrid = (): {
+		columns: number
+		rows: number
+		ss: number
+		originX: number
+		originY: number
+	} => {
+		const count = Math.max(1, p.int(p.random(4, p.random(30))))
+		const ss = p.min(p.width, p.height) / count
+		const columns = Math.max(1, Math.floor(p.width / ss))
+		const rows = Math.max(1, Math.floor(p.height / ss))
+		return {
+			columns,
+			rows,
+			ss,
+			originX: (p.width - columns * ss) / 2,
+			originY: (p.height - rows * ss) / 2,
+		}
 	}
 
 	const arc2 = (
