@@ -349,6 +349,21 @@ export const colorPalettes: { [key: string]: string[] } = {
 
 	cintas: ["#F19617", "#251207", "#15727F", "#CEAB81", "#BD3E36"],
 
+	diags: ["#FED42E", "#FF84D4", "#FFAFDA", "#51B9FF", "#2BFF6A"],
+
+	pliegues: ["#2B2827", "#959CD3", "#4EB9AF", "#DBC9D5"],
+
+	planetes: [
+		"#000000",
+		"#FFFFFF",
+		"#807DDB",
+		"#ED829D",
+		"#E8D84E",
+		"#F23E35",
+		"#4B13C4",
+		"#6D915F",
+	],
+
 	triangleOfSadness: [
 		"#d4bba3", // sunlit skin/beige tones
 		"#c1a68f", // sandy wood deck hues
