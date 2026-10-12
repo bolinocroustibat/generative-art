@@ -1,10 +1,12 @@
 import type p5 from "p5"
+import { isRecordingAnimation, recordAnimation } from "./recordAnimation"
 import { saveImage } from "./saveImage"
 
 // Sets up common keyboard controls for p5 sketches
 //
 // Default controls:
 // - 's': Save canvas as image
+// - 'v': Save an 8 second MP4 of the animation
 // - ' ' (space): Generate new artwork
 export const setupKeyboardControls = (
 	p: p5,
@@ -23,11 +25,18 @@ export const setupKeyboardControls = (
 	} = config
 
 	return (): void => {
+		if (isRecordingAnimation()) return
+
 		const key = p.key.toLowerCase()
 
 		// Standard controls
 		if (key === "s" && saveFn) {
 			saveFn(p)
+			return
+		}
+
+		if (key === "v") {
+			void recordAnimation(p, algorithmName)
 			return
 		}
 

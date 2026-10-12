@@ -4,8 +4,8 @@
  * import { getColorPalette, getCanvasDimensions, setupKeyboardControls } from "../../helpers"
  */
 
-// Re-export everything from individual helper files
-export * from "./colorUtils"
 export * from "./canvasDimensions"
+export * from "./colorUtils"
 export * from "./keyboardControls"
+export * from "./recordAnimation"
 export * from "./saveImage"
